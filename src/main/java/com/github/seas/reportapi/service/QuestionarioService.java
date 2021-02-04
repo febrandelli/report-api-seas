@@ -4,9 +4,10 @@ import com.github.seas.reportapi.domain.Questionario;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.repository.QuestionarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +16,10 @@ public class QuestionarioService {
 
     private final QuestionarioRepository questionarioRepository;
 
-    public List<Questionario> listAll(){
-        return questionarioRepository.findAll();
+    public Page<Questionario> listQuestionarios(int page, int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+        return questionarioRepository.findAll(pageRequest);
     }
 
     public Questionario createQuestionario(Questionario questionario) {

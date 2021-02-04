@@ -4,6 +4,7 @@ import com.github.seas.reportapi.domain.Questionario;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.QuestionarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,8 @@ public class QuestionarioController {
     private final QuestionarioService questionarioService;
 
     @GetMapping
-    public ResponseEntity<List<Questionario>> getQuestionarios() {
-        return new ResponseEntity<>(questionarioService.listAll(), HttpStatus.OK);
+    public ResponseEntity<Page<Questionario>> getQuestionarios(@RequestParam Integer page, @RequestParam Integer size) {
+        return new ResponseEntity<>(questionarioService.listQuestionarios(page, size), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
