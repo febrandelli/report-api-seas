@@ -1,8 +1,7 @@
 package com.github.seas.reportapi.controller.form;
 
-import com.github.seas.reportapi.domain.User;
+import com.github.seas.reportapi.domain.Usuario;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
@@ -14,7 +13,7 @@ public class UserUpdateForm {
 
     @NotEmpty
     @NotNull
-    private String id;
+    private Long id;
     @NotNull
     @NotEmpty
     private String nomeCompleto;
@@ -27,12 +26,12 @@ public class UserUpdateForm {
 
     private String senha;
 
-    public User createUser(User userExist, PasswordEncoder encoder){
-        User user = new User();
+    public Usuario createUser(Usuario userExist, PasswordEncoder encoder){
+        Usuario user = new Usuario();
         user.setId(this.id);
         user.setNomeCompleto(this.nomeCompleto);
         user.setEmail(this.email);
-        user.setUsuario(this.usuario);
+        user.setUserName(this.usuario);
         if (this.getSenha() == null || this.getSenha().isEmpty()) {
             user.setSenha(userExist.getSenha());
             return user;

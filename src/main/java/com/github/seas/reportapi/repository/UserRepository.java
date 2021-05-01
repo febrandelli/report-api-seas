@@ -1,13 +1,11 @@
 package com.github.seas.reportapi.repository;
 
-import com.github.seas.reportapi.domain.User;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.github.seas.reportapi.domain.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-@Document("users")
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends JpaRepository<Usuario, Long> {
 
-    public Optional<User> findByUsuario(String usuario);
+    Optional<Usuario> findByUserName(String usuario);
 }

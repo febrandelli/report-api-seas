@@ -1,6 +1,6 @@
-package com.github.seas.reportapi.service;
+package com.github.seas.reportapi.config.security.Service;
 
-import com.github.seas.reportapi.domain.User;
+import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -27,13 +27,13 @@ public class TokenService {
     private String expiration;
 
     public String createToken(Authentication authentication) {
-        User logado = (User) authentication.getPrincipal();
+        Usuario logado = (Usuario) authentication.getPrincipal();
         Date today = new Date();
         Date expirationDate = new Date(today.getTime() + Long.parseLong(expiration));
 
         return Jwts.builder()
                 .setIssuer("API do SEAS")
-                .setSubject(logado.getId())
+                .setSubject(logado.getId().toString())
                 .setIssuedAt(today)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, secret)
@@ -49,11 +49,11 @@ public class TokenService {
         }
     }
 
-    public User getUserById(String token) throws NotFoundException {
+    public Usuario getUserById(String token) throws NotFoundException {
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-        String id = claims.getSubject();
-        Optional<User> user = userRepository.findById(id);
+        Long id = Long.parseLong(claims.getSubject());
+        Optional<Usuario> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
         }

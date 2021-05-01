@@ -1,27 +1,31 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.domain.User;
-import com.github.seas.reportapi.repository.UserRepository;
+import com.github.seas.reportapi.config.security.Service.TokenService;
+import com.github.seas.reportapi.controller.dto.TokenDto;
+import com.github.seas.reportapi.controller.form.LoginForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService implements UserDetailsService {
+public class AuthenticationService {
 
-    private final UserRepository userRepository;
-    @Override
-    public UserDetails loadUserByUsername(String usuario)   {
-        Optional<User> user =  userRepository.findByUsuario(usuario);
-        if (user.isPresent()){
-            return user.get();
+    private final AuthenticationManager authManager;
+    private final TokenService tokenService;
+    public ResponseEntity<TokenDto> autenticar(LoginForm form) {
+        UsernamePasswordAuthenticationToken tokenFormLogin = form.toToken();
+        try {
+            Authentication authentication = authManager.authenticate(tokenFormLogin);
+            String tokenAuthentication = tokenService.createToken(authentication);
+            return new ResponseEntity<>(new TokenDto(tokenAuthentication, "Bearer"), HttpStatus.OK);
+        } catch (AuthenticationException exception) {
+            return ResponseEntity.badRequest().build();
         }
-
-        throw new UsernameNotFoundException("Invalid credentials");
     }
 }

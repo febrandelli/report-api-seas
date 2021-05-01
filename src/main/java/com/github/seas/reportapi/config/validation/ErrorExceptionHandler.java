@@ -19,6 +19,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ErrorExceptionHandler {
 
+    public static final String MENSAGEM_GLOBAL_400 = "Requisição inválida.";
+
+    public static final String MENSAGEM_GLOBAL_401 = "Não autorizado.";
+
+    public static final String MENSAGEM_GLOBAL_403 = "Não permitido.";
+
+    public static final String MENSAGEM_GLOBAL_404 = "Recurso não encontrado.";
+
+    public static final String MENSAGEM_GLOBAL_409 = "Objeto já existente.";
+
+    public static final String MENSAGEM_GLOBAL_412 = "Pré condições não atendidas.";
+
+    public static final String MENSAGEM_GLOBAL_500 = "Erro interno do sistema.";
+
+    private static final String FALHA_NO_REQUEST_MSG_PATTERN = "Falha no request: Objeto[%s] Campo[%s] Valor[%s]";
     private final MessageSource messageSource;
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

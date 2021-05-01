@@ -4,7 +4,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.github.seas.reportapi.domain.Perfil;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class UserCreateForm {
@@ -19,4 +22,7 @@ public class UserCreateForm {
 
     @NotNull @NotEmpty
     private String senha;
+
+    @NotNull @NotEmpty
+    private List<Long> perfis;
 }

@@ -3,7 +3,7 @@ package com.github.seas.reportapi.controller;
 import com.github.seas.reportapi.controller.form.UserCreateForm;
 import com.github.seas.reportapi.controller.dto.UserResponseDto;
 import com.github.seas.reportapi.controller.form.UserUpdateForm;
-import com.github.seas.reportapi.domain.User;
+import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,45 +13,46 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("usuario")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserDefinition{
 
     private final UserService userService;
 
     @GetMapping()
     public ResponseEntity<List<UserResponseDto>> getUsers() {
-        List<User> response = userService.getAll();
-        return new ResponseEntity(response.stream().map(UserResponseDto::new), HttpStatus.OK);
+        List<Usuario> response = userService.getAll();
+
+        return new ResponseEntity<>(response.stream().map(UserResponseDto::new).collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{usuario}")
-    public ResponseEntity<UserResponseDto> getUser(@PathVariable String usuario) throws NotFoundException {
-        User response = userService.getUser(usuario);
-        if (response.getId() == null){
-            throw new NotFoundException("Usuario não encontrado.");
-        }
+    @GetMapping(value = "/{idUsuario}")
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable Long idUsuario) throws NotFoundException {
+        Usuario response = userService.getUser(idUsuario);
 
         return new ResponseEntity<>(new UserResponseDto(response), HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserCreateForm userCreate) {
-        User user = userService.createUser(userCreate);
+        Usuario user = userService.createUser(userCreate);
+
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.CREATED);
     }
 
     @PutMapping()
     public ResponseEntity<UserResponseDto> updateUser(@Valid @RequestBody UserUpdateForm userUpdate) throws NotFoundException {
-        User user = userService.updateUser(userUpdate);
+        Usuario user = userService.updateUser(userUpdate);
+
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable String id) throws NotFoundException {
-        User user = userService.getUserById(id);
+    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id) throws NotFoundException {
+        Usuario user = userService.getUserById(id);
         userService.deleteUser(id);
 
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.OK);

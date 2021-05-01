@@ -12,8 +12,8 @@ public class ReportController {
 
     private final ReportService service;
 
-    @PostMapping(value = "/geral", produces = "application/json")
-    public void gerarRelatorio(@RequestBody ReportRequest reportTime) throws Exception {
-        service.extrairRelatorio(reportTime);
-    }
+//    @PostMapping(value = "/geral", produces = "application/json")
+//    public void gerarRelatorio(@RequestBody ReportRequest reportTime) throws Exception {
+//        service.extrairRelatorio(reportTime);
+//    }
 }

@@ -1,8 +1,8 @@
 package com.github.seas.reportapi.config.security;
 
-import com.github.seas.reportapi.domain.User;
+import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
-import com.github.seas.reportapi.service.TokenService;
+import com.github.seas.reportapi.config.security.Service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,7 +33,7 @@ public class AuthenticationViaTokenFilter extends OncePerRequestFilter {
     }
 
     private void authenticationClient(String token) throws NotFoundException {
-        User usuario = tokenService.getUserById(token);
+        Usuario usuario = tokenService.getUserById(token);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getPerfis());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
