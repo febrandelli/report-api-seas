@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.seas</groupId>
-    <artifactId>report-api</artifactId>
+    <artifactId>api-seas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>report-api</name>
-    <description>Demo project for Spring Boot</description>
+    <name>api-seas</name>
+    <description>API Backend para projeto de gestão de cidadões acolhidos ou encaminhados pelo SEAS.</description>
 
     <properties>
         <java.version>1.8</java.version>
