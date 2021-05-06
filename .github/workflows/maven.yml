@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      MYSQL_HOST: database-seas.cj6mqbqhx8bf.us-east-2.rds.amazonaws.com
+      USER_DB: javaapp_seas
+      PASS_DB: seas#2021
 
     steps:
     - uses: actions/checkout@v2
