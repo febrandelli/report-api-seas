@@ -14,7 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      MYSQL_HOST: database-seas.cj6mqbqhx8bf.us-east-2.rds.amazonaws.com
+      MYSQL_HOST: ${{ secrets.MYSQL_HOST}}
       USER_DB: javaapp_seas
       PASS_DB: seas#2021
 
