@@ -12,7 +12,7 @@
     <artifactId>api-seas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>api-seas</name>
-    <description>API Backend para projeto de gestão de cidadões acolhidos ou encaminhados pelo SEAS.</description>
+    <description>API Backend para projeto de gestao de cidadoes acolhidos ou encaminhados pelo SEAS.</description>
 
     <properties>
         <java.version>1.8</java.version>

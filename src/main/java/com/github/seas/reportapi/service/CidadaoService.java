@@ -5,6 +5,8 @@ import com.github.seas.reportapi.domain.Cidadao;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.repository.CidadaoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,16 @@ public class CidadaoService {
 
     private final CidadaoRepository cidadaoRepository;
 
-    public ResponseEntity<List<Cidadao>> listAllCidadoes() {
-        List<Cidadao> cidadoes = cidadaoRepository.findAll();
+    public ResponseEntity<List<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto) {
+        Cidadao cidadaoToMatch = new Cidadao(cidadaoDto);
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Example<Cidadao> cidadaoExample = Example.of(cidadaoToMatch, exampleMatcher);
+
+        List<Cidadao> cidadoes = cidadaoRepository.findAll(cidadaoExample);
         return ResponseEntity.ok(cidadoes);
     }
 

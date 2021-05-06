@@ -22,7 +22,7 @@ public interface CidadaoDefinition {
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<List<Cidadao>> getAllCidadoes();
+    ResponseEntity<List<Cidadao>> getAllCidadoes(CidadaoDto cidadaoRequest);
 
     @ApiOperation(value = "Criar um cidadao")
     @ApiResponses({

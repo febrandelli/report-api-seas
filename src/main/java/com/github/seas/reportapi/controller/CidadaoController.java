@@ -7,6 +7,7 @@ import com.github.seas.reportapi.service.CidadaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,8 +26,8 @@ public class CidadaoController implements CidadaoDefinition{
     private CidadaoService cidadaoService;
 
     @GetMapping()
-    public ResponseEntity<List<Cidadao>> getAllCidadoes(){
-        return cidadaoService.listAllCidadoes();
+    public ResponseEntity<List<Cidadao>> getAllCidadoes(@ModelAttribute final CidadaoDto cidadaoRequest){
+        return cidadaoService.listAllCidadoes(cidadaoRequest);
     }
 
     @PostMapping()
