@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MYSQL_HOST: ${{ secrets.MYSQL_HOST}}
-      USER_DB: javaapp_seas
-      PASS_DB: seas#2021
+      USER_DB: ${{ secrets.USER_DB }}
+      PASS_DB: ${{ secrets.PASS_DB }}
 
     steps:
     - uses: actions/checkout@v2
