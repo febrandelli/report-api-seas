@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/cidadao")
 public class CidadaoController implements CidadaoDefinition{
@@ -27,16 +26,19 @@ public class CidadaoController implements CidadaoDefinition{
     @Autowired
     private CidadaoService cidadaoService;
 
+    @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<Cidadao>> getAllCidadoes(@ModelAttribute final CidadaoDto cidadaoRequest){
         return cidadaoService.listAllCidadoes(cidadaoRequest);
     }
 
+    @CrossOrigin
     @PostMapping()
     public ResponseEntity<Integer> createCidadao(@RequestBody @Valid CidadaoDto cidadaoToCreate) {
         return cidadaoService.createCidadao(cidadaoToCreate);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Integer> updateCidadao(
             @RequestBody @Valid CidadaoDto cidadaoToUpdate, @PathVariable(name = "id") Long idCidadaoToUpdate) throws NotFoundException {
