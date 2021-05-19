@@ -58,7 +58,7 @@ public class Cidadao {
             @JoinColumn(name = "cidadao_id")}, inverseJoinColumns = {
             @JoinColumn(name = "caso_especial_id")
     })
-    private Set<CasosEspeciais> casosEspeciais;
+    private Set<CasoEspecial> casosEspeciais;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cidadao_beneficio", joinColumns = {
