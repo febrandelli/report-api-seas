@@ -6,6 +6,7 @@ import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.CidadaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,16 +26,19 @@ public class CidadaoController implements CidadaoDefinition{
     @Autowired
     private CidadaoService cidadaoService;
 
+    @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<Cidadao>> getAllCidadoes(@ModelAttribute final CidadaoDto cidadaoRequest){
         return cidadaoService.listAllCidadoes(cidadaoRequest);
     }
 
+    @CrossOrigin
     @PostMapping()
     public ResponseEntity<Integer> createCidadao(@RequestBody @Valid CidadaoDto cidadaoToCreate) {
         return cidadaoService.createCidadao(cidadaoToCreate);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Integer> updateCidadao(
             @RequestBody @Valid CidadaoDto cidadaoToUpdate, @PathVariable(name = "id") Long idCidadaoToUpdate) throws NotFoundException {

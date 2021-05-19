@@ -2,7 +2,7 @@ package com.github.seas.reportapi.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.seas.reportapi.domain.Beneficio;
-import com.github.seas.reportapi.domain.CasosEspeciais;
+import com.github.seas.reportapi.domain.CasoEspecial;
 import com.github.seas.reportapi.domain.Cidade;
 import com.github.seas.reportapi.domain.Cor;
 import com.github.seas.reportapi.domain.FonteDeRenda;
@@ -53,7 +53,7 @@ public class CidadaoDto {
     private Set<Motivo> motivos;
 
     @ApiModelProperty(value = "O cidadão atende a um ou mais casos especiais?")
-    private Set<CasosEspeciais> casosEspeciais;
+    private Set<CasoEspecial> casosEspeciais;
 
     @ApiModelProperty(value = "Quais benefícios o cidadão recebe")
     private Set<Beneficio> beneficios;

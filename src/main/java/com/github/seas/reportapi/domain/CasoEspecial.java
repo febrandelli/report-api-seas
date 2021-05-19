@@ -9,13 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CasosEspeciais {
+@Table(name = "CASOS_ESPECIAIS")
+public class CasoEspecial {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
