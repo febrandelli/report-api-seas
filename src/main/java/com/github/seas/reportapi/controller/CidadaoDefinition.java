@@ -9,10 +9,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 @Api(value = "Cidadao", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Cidadões"})
 public interface CidadaoDefinition {
@@ -22,7 +22,7 @@ public interface CidadaoDefinition {
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<List<Cidadao>> getAllCidadoes(CidadaoDto cidadaoRequest);
+    ResponseEntity<Page<Cidadao>> getAllCidadoes(int page, int size, CidadaoDto cidadaoRequest);
 
     @ApiOperation(value = "Criar um cidadao")
     @ApiResponses({

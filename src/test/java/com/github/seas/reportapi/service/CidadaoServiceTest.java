@@ -20,6 +20,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -56,51 +59,51 @@ public class CidadaoServiceTest {
         mockMotivos.add(Motivo.builder().id(1).descricao("ABANDONO FAMILIAR").build());
 
         mockListaDeCidadoes.add(
-            Cidadao.builder()
-                .id(1L)
-                .nome("JOAO DO TESTE 1")
-                .cor(Cor.builder().id(1).nomeclatura("PRETO").build())
-                .sexo(Sexo.builder().id(1).nomeclatura("MASCULINO").build())
-                .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
-                .dataNascimento(LocalDate.of(1992, 12, 21))
-                .fonteDeRenda(FonteDeRenda.builder().id(1).nomeclatura("TRABALHO INFORMAL").build())
-                .beneficios(mockBeneficios)
-                .casosEspeciais(mockCasosEspeciais)
-                .motivos(mockMotivos)
-                .querSairDasRuas(Boolean.TRUE)
-                .build()
+                Cidadao.builder()
+                        .id(1L)
+                        .nome("JOAO DO TESTE 1")
+                        .cor(Cor.builder().id(1).nomeclatura("PRETO").build())
+                        .sexo(Sexo.builder().id(1).nomeclatura("MASCULINO").build())
+                        .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
+                        .dataNascimento(LocalDate.of(1992, 12, 21))
+                        .fonteDeRenda(FonteDeRenda.builder().id(1).nomeclatura("TRABALHO INFORMAL").build())
+                        .beneficios(mockBeneficios)
+                        .casosEspeciais(mockCasosEspeciais)
+                        .motivos(mockMotivos)
+                        .querSairDasRuas(Boolean.TRUE)
+                        .build()
         );
 
         mockListaDeCidadoes.add(
-            Cidadao.builder()
-                .id(2L)
-                .nome("JOAO DO TESTE 2")
-                .cor(Cor.builder().id(2).nomeclatura("BRANCO").build())
-                .sexo(Sexo.builder().id(1).nomeclatura("MASCULINO").build())
-                .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
-                .dataNascimento(LocalDate.of(1985, 12, 21))
-                .fonteDeRenda(FonteDeRenda.builder().id(2).nomeclatura("TRABALHO FORMAL").build())
-                .beneficios(mockBeneficios)
-                .casosEspeciais(mockCasosEspeciais)
-                .motivos(mockMotivos)
-                .querSairDasRuas(Boolean.TRUE)
-                .build()
+                Cidadao.builder()
+                        .id(2L)
+                        .nome("JOAO DO TESTE 2")
+                        .cor(Cor.builder().id(2).nomeclatura("BRANCO").build())
+                        .sexo(Sexo.builder().id(1).nomeclatura("MASCULINO").build())
+                        .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
+                        .dataNascimento(LocalDate.of(1985, 12, 21))
+                        .fonteDeRenda(FonteDeRenda.builder().id(2).nomeclatura("TRABALHO FORMAL").build())
+                        .beneficios(mockBeneficios)
+                        .casosEspeciais(mockCasosEspeciais)
+                        .motivos(mockMotivos)
+                        .querSairDasRuas(Boolean.TRUE)
+                        .build()
         );
 
         mockListaDeCidadoes.add(
-            Cidadao.builder()
-                .id(3L)
-                .nome("MARIA DO TESTE 1")
-                .cor(Cor.builder().id(2).nomeclatura("BRANCO").build())
-                .sexo(Sexo.builder().id(2).nomeclatura("FEMININO").build())
-                .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
-                .dataNascimento(LocalDate.of(1985, 12, 21))
-                .fonteDeRenda(FonteDeRenda.builder().id(2).nomeclatura("TRABALHO FORMAL").build())
-                .beneficios(mockBeneficios)
-                .casosEspeciais(mockCasosEspeciais)
-                .motivos(mockMotivos)
-                .querSairDasRuas(Boolean.TRUE)
-                .build()
+                Cidadao.builder()
+                        .id(3L)
+                        .nome("MARIA DO TESTE 1")
+                        .cor(Cor.builder().id(2).nomeclatura("BRANCO").build())
+                        .sexo(Sexo.builder().id(2).nomeclatura("FEMININO").build())
+                        .cidadeNascimento(Cidade.builder().id(1).nome("JUNDIAI").estado(Estado.builder().id(1).nome("SAO PAULO").uF("SP").build()).build())
+                        .dataNascimento(LocalDate.of(1985, 12, 21))
+                        .fonteDeRenda(FonteDeRenda.builder().id(2).nomeclatura("TRABALHO FORMAL").build())
+                        .beneficios(mockBeneficios)
+                        .casosEspeciais(mockCasosEspeciais)
+                        .motivos(mockMotivos)
+                        .querSairDasRuas(Boolean.TRUE)
+                        .build()
         );
     }
 
@@ -108,8 +111,8 @@ public class CidadaoServiceTest {
     public void buscarTodosOsCidadoesComSucesso() {
 
         Mockito.when(mockCidadaoRepository.findAll(Mockito.any(Example.class))).thenReturn(mockListaDeCidadoes);
-
-        ResponseEntity<List<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest);
+        Pageable pageable = PageRequest.of(0, 10);
+        ResponseEntity<Page<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest, pageable);
 
         Assert.assertEquals(mockListaDeCidadoes, response.getBody());
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -119,10 +122,10 @@ public class CidadaoServiceTest {
     public void buscarUmCidadaoEspecifico() {
         List<Cidadao> mockCidadaoEspecifico = new ArrayList<>();
         mockCidadaoEspecifico.add(mockListaDeCidadoes.get(0));
-
+        Pageable pageable = PageRequest.of(0, 10);
         Mockito.when(mockCidadaoRepository.findAll(Mockito.any(Example.class))).thenReturn(mockCidadaoEspecifico);
 
-        ResponseEntity<List<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest);
+        ResponseEntity<Page<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest, pageable);
 
         Assert.assertEquals(mockCidadaoEspecifico, response.getBody());
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -131,8 +134,8 @@ public class CidadaoServiceTest {
     @Test
     public void buscarUmCidadaoQueNaoExiste() {
         Mockito.when(mockCidadaoRepository.findAll(Mockito.any(Example.class))).thenReturn(new ArrayList());
-
-        ResponseEntity<List<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest);
+        Pageable pageable = PageRequest.of(0, 10);
+        ResponseEntity<Page<Cidadao>> response = cidadaoService.listAllCidadoes(mockCidadaoRequest, pageable);
 
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }

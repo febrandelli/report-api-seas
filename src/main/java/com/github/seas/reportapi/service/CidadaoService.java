@@ -7,11 +7,11 @@ import com.github.seas.reportapi.repository.CidadaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class CidadaoService {
 
     private final CidadaoRepository cidadaoRepository;
 
-    public ResponseEntity<List<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto) {
+    public ResponseEntity<Page<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto, Pageable pageable) {
         Cidadao cidadaoToMatch = new Cidadao(cidadaoDto);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -28,8 +28,8 @@ public class CidadaoService {
 
         Example<Cidadao> cidadaoExample = Example.of(cidadaoToMatch, exampleMatcher);
 
-        List<Cidadao> cidadoes = cidadaoRepository.findAll(cidadaoExample);
-        if (cidadoes.isEmpty()){
+        Page<Cidadao> cidadoes = cidadaoRepository.findAll(cidadaoExample, pageable);
+        if (cidadoes.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(cidadoes);
