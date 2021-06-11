@@ -5,8 +5,7 @@ import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +16,9 @@ public class CidadeController implements CidadeDefinition {
     @Autowired
     CidadeService cidadeService;
 
-    @Override
-    public ResponseEntity<List<Cidade>> getAllCidades(Integer estadoId) throws NotFoundException {
+    @CrossOrigin
+    @GetMapping("/{idEstado}")
+    public ResponseEntity<List<Cidade>> getAllCidades(@PathVariable("idEstado") Integer estadoId) throws NotFoundException {
         return cidadeService.getCidadesByEstado(estadoId);
     }
 }
