@@ -31,7 +31,7 @@ public class UserUpdateForm {
         user.setId(this.id);
         user.setNomeCompleto(this.nomeCompleto);
         user.setEmail(this.email);
-        user.setUserName(this.usuario);
+        user.setUsername(this.usuario);
         if (this.getSenha() == null || this.getSenha().isEmpty()) {
             user.setSenha(userExist.getSenha());
             return user;

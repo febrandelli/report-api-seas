@@ -1,13 +1,6 @@
 package com.github.seas.reportapi.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.github.seas.reportapi.domain.Beneficio;
-import com.github.seas.reportapi.domain.CasoEspecial;
-import com.github.seas.reportapi.domain.Cidade;
-import com.github.seas.reportapi.domain.Cor;
-import com.github.seas.reportapi.domain.FonteDeRenda;
-import com.github.seas.reportapi.domain.Motivo;
-import com.github.seas.reportapi.domain.Sexo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,28 +26,31 @@ public class CidadaoDto {
     private LocalDate dataNascimento;
 
     @NotNull
-    @ApiModelProperty(value = "Sexo que o cidadão se identifica")
-    private Sexo sexo;
+    @ApiModelProperty(value = "Sexo que o cidadão se identifica", example = "1")
+    private int sexo;
 
     @NotNull
-    @ApiModelProperty(value = "Cor de pele do cidadão")
-    private Cor cor;
+    @ApiModelProperty(value = "Cor de pele do cidadão", example = "1")
+    private int cor;
 
-    @ApiModelProperty(value = "Cidade de nascimento do cidadão")
-    private Cidade cidadeNascimento;
+    @ApiModelProperty(value = "Cidade de nascimento do cidadão", example = "42")
+    private long cidadeNascimento;
 
-    @ApiModelProperty(value = "Principal fonte de renda do cidadão")
-    private FonteDeRenda fonteDeRenda;
+    @ApiModelProperty(value = "Principal fonte de renda do cidadão", example = "2")
+    private int fonteDeRenda;
 
-    @ApiModelProperty(value = "Se o cidadão tem interesse em sair da situação de rua")
+    @ApiModelProperty(value = "Se o cidadão tem interesse em sair da situação de rua", example = "true")
     private Boolean querSairDasRuas;
 
-    @ApiModelProperty(value = "Os motivos que levaram o cidadão a viver em situação de rua")
-    private Set<Motivo> motivos;
+    @ApiModelProperty(value = "O que o cidadao precisa para sair da situação de rua", example = "Cidadão precisa de emprego")
+    private String precisaParaSairRua;
 
-    @ApiModelProperty(value = "O cidadão atende a um ou mais casos especiais?")
-    private Set<CasoEspecial> casosEspeciais;
+    @ApiModelProperty(value = "Os motivos que levaram o cidadão a viver em situação de rua", example = "[1,2]")
+    private Set<Integer> motivos;
 
-    @ApiModelProperty(value = "Quais benefícios o cidadão recebe")
-    private Set<Beneficio> beneficios;
+    @ApiModelProperty(value = "O cidadão atende a um ou mais casos especiais?", example = "[1,2]")
+    private Set<Integer> casosEspeciais;
+
+    @ApiModelProperty(value = "Quais benefícios o cidadão recebe", example = "[1,2]")
+    private Set<Integer> beneficios;
 }

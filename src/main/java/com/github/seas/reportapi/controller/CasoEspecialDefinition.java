@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Caso Especial", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Caso Especial"})
+@Api(value = "Casos Especiais", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Casos Especiais"})
 public interface CasoEspecialDefinition {
 
     @ApiOperation(value = "Listar todos os casos especiais")
