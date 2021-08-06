@@ -19,6 +19,7 @@ public class FonteDeRenda {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "NOMECLATURA")
     private String nomeclatura;
 
     @Override

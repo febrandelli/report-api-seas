@@ -46,6 +46,9 @@ public class Cidadao {
     @Column(name = "DESEJA_SAIR_RUA")
     private Boolean querSairDasRuas;
 
+    @Column(name = "PRECISA_PARA_SAIR_RUA")
+    private String precisaParaSairRua;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cidadao_motivo", joinColumns = {
             @JoinColumn(name = "cidadao_id")}, inverseJoinColumns = {
@@ -66,17 +69,4 @@ public class Cidadao {
             @JoinColumn(name = "beneficio_id")
     })
     private Set<Beneficio> beneficios;
-
-    public Cidadao(CidadaoDto dto){
-        this.nome =dto.getNome();
-        this.dataNascimento = dto.getDataNascimento();
-        this.sexo = dto.getSexo();
-        this.cor = dto.getCor();
-        this.cidadeNascimento = dto.getCidadeNascimento();
-        this.fonteDeRenda = dto.getFonteDeRenda();
-        this.querSairDasRuas = dto.getQuerSairDasRuas();
-        this.motivos = dto.getMotivos();
-        this.casosEspeciais = dto.getCasosEspeciais();
-        this.beneficios = dto.getBeneficios();
-    }
 }

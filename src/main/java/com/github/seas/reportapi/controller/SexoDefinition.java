@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Sexo", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Sexo"})
+@Api(value = "Sexos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Sexos"})
 public interface SexoDefinition {
 
     @ApiOperation(value = "Listar todos os sexos")

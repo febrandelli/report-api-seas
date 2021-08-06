@@ -18,12 +18,12 @@ public class Motivo {
     @Id
     private Integer id;
 
-    @Column(name = "DESCRICAO")
-    private String descricao;
+    @Column(name = "NOMECLATURA")
+    private String nomeclatura;
 
     @Override
     public String toString(){
-        return this.descricao;
+        return this.nomeclatura;
     }
 
 }

@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Fonte de renda", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Fonte de renda"})
+@Api(value = "Fontes de renda", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Fontes de renda"})
 public interface FonteDeRendaDefinition {
 
     @ApiOperation(value = "Listar todas as fontes de renda")
