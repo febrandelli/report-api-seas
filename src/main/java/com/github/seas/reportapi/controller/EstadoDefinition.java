@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Estado", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Estado"})
+@Api(value = "Estados", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Estados"})
 public interface EstadoDefinition {
 
     @ApiOperation(value = "Listar todos os estados")

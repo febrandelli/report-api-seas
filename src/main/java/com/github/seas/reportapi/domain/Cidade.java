@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Cidade {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @Column(name = "NOME")
     private String nome;
@@ -27,6 +27,6 @@ public class Cidade {
 
     @Override
     public String toString(){
-        return this.nome;
+        return this.nome + " - " + this.estado.getUF();
     }
 }

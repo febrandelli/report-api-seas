@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@Api(value = "Cidadao", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Cidadões"})
+@Api(value = "Cidadões", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Cidadões"})
 public interface CidadaoDefinition {
 
     @ApiOperation(value = "Listar todos os cidadões")
@@ -29,12 +29,12 @@ public interface CidadaoDefinition {
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<Integer> createCidadao(CidadaoDto cidadaoToCreate);
+    ResponseEntity<Cidadao> createCidadao(CidadaoDto cidadaoToCreate);
 
     @ApiOperation(value = "Atualiza um cidadao")
     @ApiResponses({
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<Integer> updateCidadao(CidadaoDto cidadaoToUpdate, Long idCidadaoToUpdate) throws NotFoundException;
+    ResponseEntity<Cidadao> updateCidadao(CidadaoDto cidadaoToUpdate, Long idCidadaoToUpdate) throws NotFoundException;
 }

@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Cidade", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Cidades"})
+@Api(value = "Cidades", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Cidades"})
 public interface CidadeDefinition {
 
     @ApiOperation(value = "Listar todas cidades por Estado(UF)")

@@ -1,3 +1,7 @@
+INSERT INTO perfil(id, hierarquia) VALUES
+(1, 'ADM'),
+(2, 'OPERACAO');
+
 INSERT INTO casos_especiais(id, nomeclatura) VALUES
 (1, 'DEFICIENTE'),
 (2, 'EXPLORAÇÃO SEXUAL'),
@@ -17,7 +21,7 @@ INSERT INTO beneficio(id, nomeclatura) VALUES
 (2, 'BOLSA FAMILIA'),
 (3, 'BPC/LOAS');
 
-INSERT INTO motivos (id, descricao) VALUES
+INSERT INTO motivos (id, nomeclatura) VALUES
 (1, 'CONFLITO FAMILIAR'),
 (2, 'ABUSO DE ALCOOL'),
 (3, 'ABUSO DE DROGAS'),
@@ -28,6 +32,17 @@ INSERT INTO cor (id, nomeclatura) VALUES
 (1, 'PARDO'),
 (2, 'BRANCO'),
 (3, 'PRETO');
+
+INSERT INTO servico (id, nomeclatura) VALUES
+(1, 'PERNOITE, BANHO, ALIMENTAÇÃO'),
+(2, 'VAGA EM ABRIGO'),
+(3, 'TRATAMENTO DE SAUDE (OUTROS)'),
+(4, 'MUDANÇA DE VIDA'),
+(5, 'SISTEMA JURIDICO'),
+(6, 'TRABALHO E RENDA'),
+(7, 'TRATAMENTO DE SAUDE (ALCOOL E DROGAS)'),
+(8, 'MORADIA/HABITAÇÃO'),
+(9, 'RECAMBIO/ PASSAGEM PARA OUTRA CIDADE');
 
 INSERT INTO sexo (id, nomeclatura) VALUES
 (1, 'MASCULINO' ),

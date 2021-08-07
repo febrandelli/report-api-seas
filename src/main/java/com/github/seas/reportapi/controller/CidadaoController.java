@@ -39,13 +39,13 @@ public class CidadaoController implements CidadaoDefinition {
 
     @CrossOrigin
     @PostMapping()
-    public ResponseEntity<Integer> createCidadao(@RequestBody @Valid CidadaoDto cidadaoToCreate) {
+    public ResponseEntity<Cidadao> createCidadao(@RequestBody @Valid CidadaoDto cidadaoToCreate) {
         return cidadaoService.createCidadao(cidadaoToCreate);
     }
 
     @CrossOrigin
     @PutMapping("/{id}")
-    public ResponseEntity<Integer> updateCidadao(
+    public ResponseEntity<Cidadao> updateCidadao(
             @RequestBody @Valid CidadaoDto cidadaoToUpdate, @PathVariable(name = "id") Long idCidadaoToUpdate) throws NotFoundException {
         return cidadaoService.updateCidadao(idCidadaoToUpdate, cidadaoToUpdate);
     }

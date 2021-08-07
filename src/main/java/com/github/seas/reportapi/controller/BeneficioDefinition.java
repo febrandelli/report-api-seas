@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Api(value = "Beneficio", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Beneficio"})
+@Api(value = "Beneficios", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, tags = {"Beneficios"})
 public interface BeneficioDefinition {
 
     @ApiOperation(value = "Listar todos os beneficios")

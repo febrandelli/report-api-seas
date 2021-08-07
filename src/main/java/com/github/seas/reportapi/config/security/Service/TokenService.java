@@ -2,7 +2,7 @@ package com.github.seas.reportapi.config.security.Service;
 
 import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
-import com.github.seas.reportapi.repository.UserRepository;
+import com.github.seas.reportapi.repository.UsuarioRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TokenService {
 
-    private final UserRepository userRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Value("${forum.jwt.secret}")
     private String secret;
@@ -53,7 +53,7 @@ public class TokenService {
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         Long id = Long.parseLong(claims.getSubject());
-        Optional<Usuario> user = userRepository.findById(id);
+        Optional<Usuario> user = usuarioRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
         }

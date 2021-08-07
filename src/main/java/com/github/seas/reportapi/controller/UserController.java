@@ -22,6 +22,7 @@ public class UserController implements UserDefinition{
 
     private final UserService userService;
 
+    @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<UserResponseDto>> getUsers() {
         List<Usuario> response = userService.getAll();
@@ -29,6 +30,7 @@ public class UserController implements UserDefinition{
         return new ResponseEntity<>(response.stream().map(UserResponseDto::new).collect(Collectors.toList()), HttpStatus.OK);
     }
 
+	@CrossOrigin
     @GetMapping(value = "/{idUsuario}")
     public ResponseEntity<UserResponseDto> getUser(@PathVariable Long idUsuario) throws NotFoundException {
         Usuario response = userService.getUser(idUsuario);
@@ -36,6 +38,7 @@ public class UserController implements UserDefinition{
         return new ResponseEntity<>(new UserResponseDto(response), HttpStatus.OK);
     }
 
+	@CrossOrigin
     @PostMapping()
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserCreateForm userCreate) {
         Usuario user = userService.createUser(userCreate);
@@ -43,6 +46,7 @@ public class UserController implements UserDefinition{
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.CREATED);
     }
 
+	@CrossOrigin
     @PutMapping()
     public ResponseEntity<UserResponseDto> updateUser(@Valid @RequestBody UserUpdateForm userUpdate) throws NotFoundException {
         Usuario user = userService.updateUser(userUpdate);
@@ -50,6 +54,7 @@ public class UserController implements UserDefinition{
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.OK);
     }
 
+	@CrossOrigin
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id) throws NotFoundException {
         Usuario user = userService.getUserById(id);
