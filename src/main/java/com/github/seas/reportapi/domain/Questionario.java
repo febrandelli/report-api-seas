@@ -2,7 +2,6 @@ package com.github.seas.reportapi.domain;
 
 import com.github.seas.reportapi.domain.enums.MotivoAbordagemEnum;
 import com.github.seas.reportapi.domain.enums.PeriodoJundiaiEnum;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -47,6 +46,9 @@ public class Questionario {
 	@Column(name = "MOTIVO_ABORDAGEM")
 	private MotivoAbordagemEnum motivoAbordagem;
 
+	@Column(name = "NUMERO_CHAMADO")
+	private Integer numeroChamado;
+
 	@Column(name = "TEMPO_JUNDIAI")
 	private PeriodoJundiaiEnum tempoJundiai;
 
@@ -69,4 +71,13 @@ public class Questionario {
 
 	@Column(name = "OBSERVACAO")
 	private String observacao;
+
+	@Column(name = "QT_PESSOAS_ABORDADAS")
+	private Integer qtPessoasAbordadas;
+
+	@Column(name = "ORIENTACAO")
+	private String orientacao;
+
+	@Column(name = "ENCAMINHAMENTO")
+	private String encaminhamento;
 }

@@ -82,7 +82,8 @@ create table cidadao
     id_cor             INT          NOT NULL,
     id_cidade          INT          NOT NULL,
     id_principal_renda INT          NOT NULL,
-    deseja_sair_rua    BOOL         NOT NULL
+    deseja_sair_rua       BOOL         NOT NULL,
+    precisa_para_sair_rua TEXT      NOT NULL
 );
 
 CREATE TABLE beneficio
@@ -112,9 +113,13 @@ CREATE TABLE questionario
     id_cidadao       INT          NOT NULL,
     id_cidade_origem INT          NOT NULL,
     motivo_abordagem VARCHAR(50),
+    numero_chamado INT,
     tempo_jundiai    INT,
     tempo_situacao_de_rua   INT,
-    observacao MESSAGE_TEXT
+    observacao TEXT,
+    qt_pessoas_abordadas INT,
+    orientacao TEXT,
+    encaminhamento TEXT
 );
 
 CREATE TABLE servico

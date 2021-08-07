@@ -27,17 +27,17 @@ public class CidadaoDto {
 
     @NotNull
     @ApiModelProperty(value = "Sexo que o cidadão se identifica", example = "1")
-    private int sexo;
+    private Integer sexo;
 
     @NotNull
     @ApiModelProperty(value = "Cor de pele do cidadão", example = "1")
-    private int cor;
+    private Integer cor;
 
     @ApiModelProperty(value = "Cidade de nascimento do cidadão", example = "42")
-    private long cidadeNascimento;
+    private Long cidadeNascimento;
 
     @ApiModelProperty(value = "Principal fonte de renda do cidadão", example = "2")
-    private int fonteDeRenda;
+    private Integer fonteDeRenda;
 
     @ApiModelProperty(value = "Se o cidadão tem interesse em sair da situação de rua", example = "true")
     private Boolean querSairDasRuas;

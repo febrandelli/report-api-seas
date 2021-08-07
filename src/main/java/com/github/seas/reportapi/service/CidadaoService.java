@@ -20,6 +20,7 @@ import com.github.seas.reportapi.repository.MotivoRepository;
 import com.github.seas.reportapi.repository.SexoRepository;
 import javassist.tools.web.BadHttpRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.ILoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -29,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -46,15 +48,37 @@ public class CidadaoService {
     private final SexoRepository sexoRepository;
 
     public ResponseEntity<Page<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto, Pageable pageable) {
-        Set<Beneficio> beneficios = beneficioRepository.findByIdIn(cidadaoDto.getBeneficios());
-        Set<CasoEspecial> casosEspeciais = casoEspecialRepository.findByIdIn(cidadaoDto.getCasosEspeciais());
-        Cidade cidade = cidadeRepository.findById(cidadaoDto.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
-        Cor cor = corRepository.findById(cidadaoDto.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
-        FonteDeRenda fonteDeRenda = fonteDeRendaRepository.findById(cidadaoDto.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
-        Set<Motivo> motivos = motivoRepository.findByIdIn(cidadaoDto.getMotivos());
-        Sexo sexo = sexoRepository.findById(cidadaoDto.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
-
         Cidadao cidadaoToMatch = new Cidadao();
+        Set<Beneficio> beneficios = null;
+        Set<CasoEspecial> casosEspeciais = null;
+        Cidade cidade = null;
+        Cor cor = null;
+        FonteDeRenda fonteDeRenda = null;
+        Set<Motivo> motivos = null;
+        Sexo sexo = null;
+
+        if (cidadaoDto.getBeneficios() != null) {
+            beneficios = beneficioRepository.findByIdIn(cidadaoDto.getBeneficios());
+        }
+        if (cidadaoDto.getCasosEspeciais() != null) {
+            casosEspeciais = casoEspecialRepository.findByIdIn(cidadaoDto.getCasosEspeciais());
+        }
+        if (cidadaoDto.getCidadeNascimento() != null) {
+            cidade = cidadeRepository.findById(cidadaoDto.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
+        }
+        if (cidadaoDto.getCor() != null) {
+            cor = corRepository.findById(cidadaoDto.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
+        }
+        if (cidadaoDto.getFonteDeRenda() != null) {
+            fonteDeRenda = fonteDeRendaRepository.findById(cidadaoDto.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
+        }
+        if (cidadaoDto.getMotivos() != null) {
+            motivos = motivoRepository.findByIdIn(cidadaoDto.getMotivos());
+        }
+        if (cidadaoDto.getSexo() != null) {
+            sexo = sexoRepository.findById(cidadaoDto.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
+        }
+
         cidadaoToMatch.setBeneficios(beneficios);
         cidadaoToMatch.setCasosEspeciais(casosEspeciais);
         cidadaoToMatch.setCidadeNascimento(cidade);

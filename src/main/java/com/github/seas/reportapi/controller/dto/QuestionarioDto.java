@@ -25,6 +25,7 @@ public class QuestionarioDto {
 	private String dataAtualizacao;
 	private String local;
 	private String motivoAbordagem;
+	private Integer numeroChamado;
 	private String nomeAbordado;
 	private String dataNascimentoAbordado;
 	private long idadeAbordado;
@@ -43,6 +44,9 @@ public class QuestionarioDto {
 	private List<String> casosEspeciais;
 	private List<String> responsaveisPeloPreenchimento;
 	private String observacao;
+	private Integer qtPessoasAbordadas;
+	private String orientacao;
+	private String encaminhamento;
 
 	public QuestionarioDto(Questionario questionario) {
 		this.id = questionario.getId();
@@ -50,6 +54,7 @@ public class QuestionarioDto {
 		this.dataAtualizacao = questionario.getDtUpdate() == null ? new SimpleDateFormat("yyyy-MM-dd hh:mm").format(Date.from(questionario.getDtInsert().toInstant(ZoneOffset.UTC))) : new SimpleDateFormat("yyyy-MM-dd hh:mm").format(Date.from(questionario.getDtUpdate().toInstant(ZoneOffset.UTC)));
 		this.local = questionario.getLocal();
 		this.motivoAbordagem = questionario.getMotivoAbordagem().toString();
+		this.numeroChamado = questionario.getNumeroChamado() == null ? 0 : questionario.getNumeroChamado();
 		this.nomeAbordado = questionario.getCidadao().getNome();
 		this.dataNascimentoAbordado = new SimpleDateFormat("yyyy-MM-dd").format(Date.from(questionario.getCidadao().getDataNascimento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		this.idadeAbordado = questionario.getCidadao().getDataNascimento().until(LocalDate.now(), ChronoUnit.YEARS);
@@ -68,5 +73,8 @@ public class QuestionarioDto {
 		this.casosEspeciais = questionario.getCidadao().getCasosEspeciais().stream().map(CasoEspecial::getNomeclatura).collect(Collectors.toList());
 		this.responsaveisPeloPreenchimento = questionario.getResponsavelPreenchimento().stream().map(Usuario::getNomeCompleto).collect(Collectors.toList());
 		this.observacao = questionario.getObservacao();
+		this.qtPessoasAbordadas = questionario.getQtPessoasAbordadas();
+		this.orientacao = questionario.getOrientacao();
+		this.encaminhamento = questionario.getEncaminhamento();
 	}
 }
