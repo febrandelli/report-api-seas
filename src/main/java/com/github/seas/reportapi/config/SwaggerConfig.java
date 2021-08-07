@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -27,12 +28,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
 
 @EnableSwagger2
 @Configuration
+@CrossOrigin
 public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     @Value("${info.app.name: Api Documatation}")
@@ -50,8 +53,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
         return new Docket(SWAGGER_2)
                 .apiInfo(apiInfo())
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(apiKey()))
+                .securityContexts(Collections.singletonList(securityContext()))
+                .securitySchemes(Collections.singletonList(apiKey()))
                 .genericModelSubstitutes(ResponseEntity.class)
                 .forCodeGeneration(true)
                 .genericModelSubstitutes(ResponseEntity.class)
