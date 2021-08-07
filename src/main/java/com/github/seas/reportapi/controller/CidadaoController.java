@@ -32,7 +32,7 @@ public class CidadaoController implements CidadaoDefinition {
     @CrossOrigin
     @GetMapping()
     public ResponseEntity<Page<Cidadao>> getAllCidadoes(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                        @RequestParam(value = "size", defaultValue = "10") int size, @ModelAttribute final CidadaoDto cidadaoRequest) {
+                                                        @RequestParam(value = "size", defaultValue = "10") int size, @ModelAttribute CidadaoDto cidadaoRequest) {
         Pageable pageable = PageRequest.of(page, size);
         return cidadaoService.listAllCidadoes(cidadaoRequest, pageable);
     }
