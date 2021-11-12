@@ -18,7 +18,7 @@ public class SpringAuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usuario) {
-        Optional<Usuario> user = usuarioRepository.findByUsername(usuario);
+        Optional<Usuario> user = usuarioRepository.findByEmail(usuario);
         if (user.isPresent()) {
             return user.get();
         }
