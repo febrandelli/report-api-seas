@@ -12,5 +12,7 @@ public interface UsuarioRepository
 
     Optional<Usuario> findByUsername(String usuario);
 
+    Optional<Usuario> findByEmail(String email);
+
     Set<Usuario> findByIdIn(List<Long> ids);
 }
