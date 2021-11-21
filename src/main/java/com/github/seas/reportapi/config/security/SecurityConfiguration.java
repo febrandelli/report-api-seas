@@ -49,6 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/usuario/resetpassword").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/*").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/cidadao/*").access("hasAuthority('Administrador')")
                 .antMatchers(HttpMethod.DELETE, "/usuario/*").access("hasAuthority('Administrador')")

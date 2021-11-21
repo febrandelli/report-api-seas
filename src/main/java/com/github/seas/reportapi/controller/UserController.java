@@ -1,8 +1,10 @@
 package com.github.seas.reportapi.controller;
 
+import com.github.seas.reportapi.controller.form.ResetPasswordRequest;
 import com.github.seas.reportapi.controller.form.UserCreateForm;
 import com.github.seas.reportapi.controller.dto.UserResponseDto;
 import com.github.seas.reportapi.controller.form.UserUpdateForm;
+import com.github.seas.reportapi.controller.response.ResetPasswordResponse;
 import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.UserService;
@@ -61,5 +63,11 @@ public class UserController implements UserDefinition{
         userService.deleteUser(id);
 
         return new ResponseEntity<>(new UserResponseDto(user), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping("/resetpassword")
+    public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordRequest request) throws NotFoundException {
+        return userService.resetPassword(request.getEmail());
     }
 }
