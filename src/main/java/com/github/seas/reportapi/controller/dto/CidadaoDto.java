@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -23,7 +23,7 @@ public class CidadaoDto {
 
     @ApiModelProperty(value = "Data de nascimento", example = "1992-02-26")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Brazil/East")
-    private LocalDate dataNascimento;
+    private String dataNascimento;
 
     @NotNull
     @ApiModelProperty(value = "Sexo que o cidadão se identifica", example = "1")
