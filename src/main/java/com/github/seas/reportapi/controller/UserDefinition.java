@@ -2,8 +2,10 @@ package com.github.seas.reportapi.controller;
 
 import com.github.seas.reportapi.config.validation.ErrorExceptionHandler;
 import com.github.seas.reportapi.controller.dto.UserResponseDto;
+import com.github.seas.reportapi.controller.form.ResetPasswordRequest;
 import com.github.seas.reportapi.controller.form.UserCreateForm;
 import com.github.seas.reportapi.controller.form.UserUpdateForm;
+import com.github.seas.reportapi.controller.response.ResetPasswordResponse;
 import com.github.seas.reportapi.exception.ErroInfo;
 import com.github.seas.reportapi.exception.NotFoundException;
 import io.swagger.annotations.Api;
@@ -52,4 +54,11 @@ public interface UserDefinition {
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
     ResponseEntity<UserResponseDto> deleteUser(Long id) throws NotFoundException;
+
+    @ApiOperation(value = "Reseta a senha e envia email com nova senha")
+    @ApiResponses({
+            @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
+            @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
+            @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
+    ResponseEntity<ResetPasswordResponse> resetPassword(ResetPasswordRequest email) throws NotFoundException;
 }
