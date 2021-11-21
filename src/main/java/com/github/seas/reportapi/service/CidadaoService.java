@@ -30,8 +30,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 @Service
@@ -46,6 +49,8 @@ public class CidadaoService {
     private final FonteDeRendaRepository fonteDeRendaRepository;
     private final MotivoRepository motivoRepository;
     private final SexoRepository sexoRepository;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(new Locale("pt", "BR"));
 
     public ResponseEntity<Page<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto, Pageable pageable) {
         Cidadao cidadaoToMatch = new Cidadao();
@@ -83,7 +88,7 @@ public class CidadaoService {
         cidadaoToMatch.setCasosEspeciais(casosEspeciais);
         cidadaoToMatch.setCidadeNascimento(cidade);
         cidadaoToMatch.setCor(cor);
-        cidadaoToMatch.setDataNascimento(cidadaoDto.getDataNascimento());
+        cidadaoToMatch.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
         cidadaoToMatch.setFonteDeRenda(fonteDeRenda);
         cidadaoToMatch.setMotivos(motivos);
         cidadaoToMatch.setNome(cidadaoDto.getNome());
@@ -118,7 +123,7 @@ public class CidadaoService {
         novoCidadao.setCasosEspeciais(casosEspeciais);
         novoCidadao.setCidadeNascimento(cidade);
         novoCidadao.setCor(cor);
-        novoCidadao.setDataNascimento(cidadaoDto.getDataNascimento());
+        novoCidadao.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
         novoCidadao.setFonteDeRenda(fonteDeRenda);
         novoCidadao.setMotivos(motivos);
         novoCidadao.setNome(cidadaoDto.getNome());
@@ -144,7 +149,7 @@ public class CidadaoService {
         cidadaoFinded.setCasosEspeciais(casosEspeciais);
         cidadaoFinded.setCidadeNascimento(cidade);
         cidadaoFinded.setCor(cor);
-        cidadaoFinded.setDataNascimento(cidadaoDto.getDataNascimento());
+        cidadaoFinded.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
         cidadaoFinded.setFonteDeRenda(fonteDeRenda);
         cidadaoFinded.setMotivos(motivos);
         cidadaoFinded.setNome(cidadaoDto.getNome());
