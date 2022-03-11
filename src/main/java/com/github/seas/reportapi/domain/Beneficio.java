@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(schema = "report_api_seas", name = "BENEFICIO")
 public class Beneficio {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

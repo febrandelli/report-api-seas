@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "CASOS_ESPECIAIS")
+@Table(schema = "report_api_seas", name = "CASOS_ESPECIAIS")
 public class CasoEspecial {
 
     @Id

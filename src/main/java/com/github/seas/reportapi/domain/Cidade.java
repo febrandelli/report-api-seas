@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "CIDADES")
+@Table(schema = "report_api_seas", name = "CIDADES")
 public class Cidade {
 
     @Id

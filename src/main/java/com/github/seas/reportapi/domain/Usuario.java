@@ -23,7 +23,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "USUARIO")
+@Table(schema = "report_api_seas", name = "usuario")
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Usuario implements UserDetails {
     private String nomeCompleto;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_perfil", joinColumns = {
+    @JoinTable(schema = "report_api_seas", name = "usuario_perfil", joinColumns = {
             @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
             @JoinColumn(name = "perfil_id")
     })

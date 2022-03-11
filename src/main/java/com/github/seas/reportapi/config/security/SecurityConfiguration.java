@@ -1,7 +1,7 @@
 package com.github.seas.reportapi.config.security;
 
-import com.github.seas.reportapi.config.security.Service.SpringAuthenticationService;
-import com.github.seas.reportapi.config.security.Service.TokenService;
+import com.github.seas.reportapi.config.security.service.SpringAuthenticationService;
+import com.github.seas.reportapi.config.security.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
