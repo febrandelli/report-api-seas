@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.config.security.Service.TokenService;
+import com.github.seas.reportapi.config.security.service.TokenService;
 import com.github.seas.reportapi.controller.dto.TokenDto;
 import com.github.seas.reportapi.controller.form.LoginForm;
 import lombok.RequiredArgsConstructor;

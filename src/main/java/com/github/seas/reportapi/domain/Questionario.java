@@ -15,12 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(schema = "report_api_seas", name = "QUESTIONARIO")
 public class Questionario {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -56,14 +58,14 @@ public class Questionario {
 	private PeriodoJundiaiEnum tempoSituacaoRua;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "questionario_servico", joinColumns = {
+	@JoinTable(schema = "report_api_seas", name = "questionario_servico", joinColumns = {
 			@JoinColumn(name = "questionario_id")}, inverseJoinColumns = {
 			@JoinColumn(name = "servico_id")
 	})
 	private Set<Servico> servicoBuscaJundiai;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "questionario_usuario", joinColumns = {
+	@JoinTable(schema = "report_api_seas", name = "questionario_usuario", joinColumns = {
 			@JoinColumn(name = "questionario_id")}, inverseJoinColumns = {
 			@JoinColumn(name = "usuario_id")
 	})

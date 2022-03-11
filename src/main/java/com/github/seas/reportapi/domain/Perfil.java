@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "PERFIL")
+@Table(schema = "report_api_seas", name = "PERFIL")
 public class Perfil implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

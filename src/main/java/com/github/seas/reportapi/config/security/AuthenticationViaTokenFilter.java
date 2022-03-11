@@ -2,7 +2,7 @@ package com.github.seas.reportapi.config.security;
 
 import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.exception.NotFoundException;
-import com.github.seas.reportapi.config.security.Service.TokenService;
+import com.github.seas.reportapi.config.security.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,10 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RequiredArgsConstructor
 public class AuthenticationViaTokenFilter extends OncePerRequestFilter {

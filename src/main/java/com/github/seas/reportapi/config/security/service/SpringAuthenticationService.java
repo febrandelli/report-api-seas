@@ -1,4 +1,4 @@
-package com.github.seas.reportapi.config.security.Service;
+package com.github.seas.reportapi.config.security.service;
 
 import com.github.seas.reportapi.domain.Usuario;
 import com.github.seas.reportapi.repository.UsuarioRepository;
