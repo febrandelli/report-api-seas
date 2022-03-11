@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(schema = "report_api_seas", name = "CIDADAO")
 public class Cidadao {
 
     @Id
@@ -50,21 +51,21 @@ public class Cidadao {
     private String precisaParaSairRua;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cidadao_motivo", joinColumns = {
+    @JoinTable(schema = "report_api_seas", name = "cidadao_motivo", joinColumns = {
             @JoinColumn(name = "cidadao_id")}, inverseJoinColumns = {
             @JoinColumn(name = "motivo_id")
     })
     private Set<Motivo> motivos;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cidadao_caso_especial", joinColumns = {
+    @JoinTable(schema = "report_api_seas", name = "cidadao_caso_especial", joinColumns = {
             @JoinColumn(name = "cidadao_id")}, inverseJoinColumns = {
             @JoinColumn(name = "caso_especial_id")
     })
     private Set<CasoEspecial> casosEspeciais;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cidadao_beneficio", joinColumns = {
+    @JoinTable(schema = "report_api_seas", name = "cidadao_beneficio", joinColumns = {
             @JoinColumn(name = "cidadao_id")}, inverseJoinColumns = {
             @JoinColumn(name = "beneficio_id")
     })

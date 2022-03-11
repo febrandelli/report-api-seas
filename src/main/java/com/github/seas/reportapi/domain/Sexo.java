@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "SEXO")
+@Table(schema = "report_api_seas", name = "SEXO")
 public class Sexo {
 
     @Id
