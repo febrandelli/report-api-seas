@@ -35,6 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -88,7 +89,7 @@ public class CidadaoService {
         cidadaoToMatch.setCasosEspeciais(casosEspeciais);
         cidadaoToMatch.setCidadeNascimento(cidade);
         cidadaoToMatch.setCor(cor);
-        cidadaoToMatch.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
+        cidadaoToMatch.setDataNascimento(Objects.isNull(cidadaoDto.getDataNascimento()) ? null : LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
         cidadaoToMatch.setFonteDeRenda(fonteDeRenda);
         cidadaoToMatch.setMotivos(motivos);
         cidadaoToMatch.setNome(cidadaoDto.getNome());
