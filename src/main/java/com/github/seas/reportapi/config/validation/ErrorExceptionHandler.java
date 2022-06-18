@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +53,23 @@ public class ErrorExceptionHandler {
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public NotFoundDto handle(NotFoundException exception) {
-        return new NotFoundDto(exception.getMessage());
+    public ExceptionResponse handle(NotFoundException exception) {
+        return createExceptionResponse(exception);
     }
 
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(IOException.class)
-    public InternalServerErrorDto handle(IOException exception) {
-        return new InternalServerErrorDto(exception.getMessage());
+    public ExceptionResponse handle(IOException exception) {
+        return createExceptionResponse(exception);
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ExceptionResponse handle(IllegalArgumentException exception) {
+        return createExceptionResponse(exception);
+    }
+
+    private ExceptionResponse createExceptionResponse (Exception exception) {
+        return new ExceptionResponse(exception.toString(), Timestamp.from(Instant.now()), exception.getMessage());
     }
 }
