@@ -1,6 +1,7 @@
 package com.github.seas.reportapi.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.seas.reportapi.domain.enums.DocumentTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -20,6 +20,18 @@ public class CidadaoDto {
     @NotNull
     @ApiModelProperty(value = "Nome do cidadão")
     private String nome;
+
+    @ApiModelProperty(value = "Nome do pai do cidadão")
+    private String nomePai;
+
+    @ApiModelProperty(value = "Nome do mãe do cidadão")
+    private String nomeMae;
+
+    @ApiModelProperty(value = "Tipo de documento do cidadão", example = "CPF")
+    private DocumentTypeEnum tipoDocumento;
+
+    @ApiModelProperty(value = "Numero de registro do documento", example = "12345678910")
+    private String numeroDocumento;
 
     @ApiModelProperty(value = "Data de nascimento", example = "1992-02-26")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Brazil/East")
