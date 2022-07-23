@@ -52,6 +52,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     public Docket swaggerSpringfoxDocket() {
 
         return new Docket(SWAGGER_2)
+                .useDefaultResponseMessages(Boolean.FALSE)
                 .apiInfo(apiInfo())
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(Collections.singletonList(apiKey()))
