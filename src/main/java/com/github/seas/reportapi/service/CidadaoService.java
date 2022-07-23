@@ -131,6 +131,10 @@ public class CidadaoService {
         novoCidadao.setQuerSairDasRuas(cidadaoDto.getQuerSairDasRuas());
         novoCidadao.setSexo(sexo);
         novoCidadao.setPrecisaParaSairRua(cidadaoDto.getPrecisaParaSairRua());
+        novoCidadao.setNomeMae(cidadaoDto.getNomeMae());
+        novoCidadao.setNomePai(cidadaoDto.getNomePai());
+        novoCidadao.setTipoDocuemnto(cidadaoDto.getTipoDocumento());
+        novoCidadao.setNumeroDocuemnto(cidadaoDto.getNumeroDocumento());
 
         Cidadao cidadaoCreated = cidadaoRepository.save(novoCidadao);
         return ResponseEntity.ok(cidadaoCreated);
