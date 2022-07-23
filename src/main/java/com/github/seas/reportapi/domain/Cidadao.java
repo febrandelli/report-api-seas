@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.domain;
 
-import com.github.seas.reportapi.controller.dto.CidadaoDto;
+import com.github.seas.reportapi.domain.enums.DocumentTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +24,18 @@ public class Cidadao {
 
     @Column(name = "NOME")
     private String nome;
+
+    @Column(name = "NOME_PAI")
+    private String nomePai;
+
+    @Column(name = "NOME_MAE")
+    private String nomeMae;
+
+    @Column(name = "TIPO_DOCUMENTO")
+    private DocumentTypeEnum tipoDocuemnto;
+
+    @Column(name = "NUMERO_DOCUMENTO")
+    private String numeroDocuemnto;
 
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
