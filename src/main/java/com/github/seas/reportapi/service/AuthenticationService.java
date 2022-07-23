@@ -28,4 +28,8 @@ public class AuthenticationService {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    public Boolean validToken(String token) {
+        return tokenService.isTokenValid(token);
+    }
 }
