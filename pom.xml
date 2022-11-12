@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.github.seas</groupId>
     <artifactId>api-seas</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>api-seas</name>
     <description>API Backend para projeto de gestao de cidadoes acolhidos ou encaminhados pelo SEAS.</description>
 
