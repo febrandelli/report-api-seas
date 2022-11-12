@@ -6,13 +6,6 @@ on:
       - 'GHA'
 
 jobs:
-  artifact:
-    name: Test master branch - GitHub Packages
-    runs-on: ubuntu-18.04
-
-    steps:
-
-
   docker:
     runs-on: ubuntu-latest
     needs: [ artifact ]
