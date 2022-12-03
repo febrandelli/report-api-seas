@@ -1,8 +1,3 @@
-alter table cidadao add nome_pai VARCHAR(255);
-alter table cidadao add nome_mae VARCHAR(255);
-alter table cidadao add tipo_documento VARCHAR(100);
-alter table cidadao add numero_documento VARCHAR(255);
-
 -- START
 
 CREATE TABLE usuario
@@ -181,3 +176,8 @@ ALTER TABLE questionario
 ALTER TABLE questionario
     ADD FOREIGN KEY (id_cidadao)
         REFERENCES cidadao (id);
+
+alter table cidadao add nome_pai VARCHAR(255);
+alter table cidadao add nome_mae VARCHAR(255);
+alter table cidadao add tipo_documento VARCHAR(100);
+alter table cidadao add numero_documento VARCHAR(255);
