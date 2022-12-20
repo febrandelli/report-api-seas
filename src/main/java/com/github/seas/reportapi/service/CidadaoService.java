@@ -1,5 +1,6 @@
 package com.github.seas.reportapi.service;
 
+import com.github.seas.reportapi.controller.dto.SearchOptionalDto;
 import com.github.seas.reportapi.controller.dto.CidadaoDto;
 import com.github.seas.reportapi.domain.Beneficio;
 import com.github.seas.reportapi.domain.CasoEspecial;
@@ -18,10 +19,7 @@ import com.github.seas.reportapi.repository.CorRepository;
 import com.github.seas.reportapi.repository.FonteDeRendaRepository;
 import com.github.seas.reportapi.repository.MotivoRepository;
 import com.github.seas.reportapi.repository.SexoRepository;
-import javassist.tools.web.BadHttpRequest;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.ILoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -32,7 +30,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -164,5 +162,12 @@ public class CidadaoService {
 
         Cidadao cidadaoUpdated = cidadaoRepository.save(cidadaoFinded);
         return ResponseEntity.ok(cidadaoUpdated);
+    }
+
+    public List<SearchOptionalDto> getCidadaos() {
+        List<Cidadao> cidadaos = cidadaoRepository.findAll();
+        List<SearchOptionalDto> optionalCidadaos = new ArrayList<>();
+        cidadaos.forEach(cidadao -> optionalCidadaos.add(new SearchOptionalDto(cidadao.getId().toString(), cidadao.getNome())));
+        return optionalCidadaos;
     }
 }
