@@ -13,5 +13,5 @@ RUN ["mvn", "dependency:resolve"]
 ADD src /report-api/src
 RUN ["mvn", "package"]
 
-ADD target/api-seas-1.0.0-SNAPSHOT.jar app.jar
+ADD target/*.jar app.jar
 ENTRYPOINT ["java","-jar", "app.jar"]
