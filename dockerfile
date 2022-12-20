@@ -8,6 +8,7 @@ RUN apt-get install -y maven
 
 ADD pom.xml /report-api/pom.xml
 RUN ["mvn", "dependency:resolve"]
+
 # Adding source, compile and package into a fat jar
 ADD src /report-api/src
 RUN ["mvn", "package"]
