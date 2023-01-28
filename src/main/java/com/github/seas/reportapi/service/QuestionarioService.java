@@ -51,21 +51,25 @@ public class QuestionarioService {
 
 	public ResponseEntity<QuestionarioResponse> create (QuestionarioRequest questionarioRequest) throws BadHttpRequest {
 		Cidadao cidadao = cidadaoRepository.findById(questionarioRequest.getIdCidadao()).orElseThrow(BadHttpRequest::new);
-		Cidade cidade = cidadeRepository.findById(questionarioRequest.getIdCidade()).orElseThrow(BadHttpRequest::new);
+		Cidade cidade = cidadeRepository.findById(questionarioRequest.getIdCidadeOrigem()).orElseThrow(BadHttpRequest::new);
 		Set<Servico> servicos = servicoRepository.findByIdIn(questionarioRequest.getServicoBuscaJundiai());
 		Set<Usuario> responsaveisPreenchimento = usuarioRepository.findByIdIn(questionarioRequest.getResponsavelPreenchimento());
 
 		Questionario questionario = new Questionario();
 		questionario.setDtInsert(LocalDateTime.now());
 		questionario.setLocal(questionarioRequest.getLocal());
-		questionario.setCidadeOrigem(cidade);
 		questionario.setCidadao(cidadao);
+		questionario.setCidadeOrigem(cidade);
 		questionario.setMotivoAbordagem(questionarioRequest.getMotivoAbordagem());
+		questionario.setNumeroChamado(questionarioRequest.getNumeroChamado());
 		questionario.setTempoJundiai(questionarioRequest.getTempoJundiai());
+		questionario.setTempoSituacaoRua(questionarioRequest.getTempoSituacaoDeRua());
 		questionario.setServicoBuscaJundiai(servicos);
 		questionario.setResponsavelPreenchimento(responsaveisPreenchimento);
 		questionario.setObservacao(questionarioRequest.getObservacao());
-		questionario.setTempoSituacaoRua(questionarioRequest.getTempoSituacaoDeRua());
+		questionario.setQtPessoasAbordadas(questionarioRequest.getPessoasAbordadas());
+		questionario.setOrientacao(questionarioRequest.getOrientacoes());
+		questionario.setEncaminhamento(questionarioRequest.getEncaminhadoPara());
 
 		Questionario questionarioSaved = questionarioRepository.save(questionario);
 		QuestionarioResponse questionarioResponse = new QuestionarioResponse();
