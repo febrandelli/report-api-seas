@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - 'GHA'
+      - 'master'
 
 jobs:
   docker:
@@ -31,3 +31,13 @@ jobs:
         with:
           push: true
           tags: febrandelli/api-seas:latest
+
+#      - name: Build & push Docker image
+#        uses: mr-smithers-excellent/docker-build-push@v5
+#        with:
+#          image: febrandelli/api-seas
+#          tags: latest
+#          registry: docker.io
+#          dockerfile: dockerfile
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
