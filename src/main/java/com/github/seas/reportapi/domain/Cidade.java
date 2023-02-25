@@ -27,6 +27,6 @@ public class Cidade {
 
     @Override
     public String toString(){
-        return this.nome + " - " + this.estado.getUF();
+        return this.nome + " - " + this.estado.getUf();
     }
 }

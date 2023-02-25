@@ -1,7 +1,7 @@
 package com.github.seas.reportapi.controller;
 
 import com.github.seas.reportapi.config.validation.ErrorExceptionHandler;
-import com.github.seas.reportapi.controller.dto.DocumentTypeDto;
+import com.github.seas.reportapi.domain.dto.DocumentTypeDto;
 import com.github.seas.reportapi.exception.ErroInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

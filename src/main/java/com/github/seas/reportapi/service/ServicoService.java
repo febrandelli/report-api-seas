@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.controller.dto.SearchOptionalDto;
+import com.github.seas.reportapi.domain.dto.SearchOptionalDto;
 import com.github.seas.reportapi.domain.Servico;
 import com.github.seas.reportapi.repository.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

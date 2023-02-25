@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.mapper;
 
-import com.github.seas.reportapi.controller.dto.CidadaoDto;
+import com.github.seas.reportapi.domain.dto.CidadaoDto;
 import com.github.seas.reportapi.domain.Cidadao;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

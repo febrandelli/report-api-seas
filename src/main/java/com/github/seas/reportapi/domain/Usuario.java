@@ -1,6 +1,7 @@
 package com.github.seas.reportapi.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,6 +24,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(schema = "report_api_seas", name = "usuario")
 public class Usuario implements UserDetails {
     @Id

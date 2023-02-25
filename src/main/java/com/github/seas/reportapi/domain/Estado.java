@@ -25,5 +25,5 @@ public class Estado {
     private String nome;
 
     @Column(name = "UF")
-    private String uF;
+    private String uf;
 }

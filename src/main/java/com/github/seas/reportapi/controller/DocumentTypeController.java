@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.controller;
 
-import com.github.seas.reportapi.controller.dto.DocumentTypeDto;
+import com.github.seas.reportapi.domain.dto.DocumentTypeDto;
 import com.github.seas.reportapi.domain.enums.DocumentTypeEnum;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

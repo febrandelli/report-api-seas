@@ -15,4 +15,5 @@ public interface UsuarioRepository
     Optional<Usuario> findByEmail(String email);
 
     Set<Usuario> findByIdIn(List<Long> ids);
+    Set<Usuario> findByNomeCompletoIn(List<String> nomes);
 }

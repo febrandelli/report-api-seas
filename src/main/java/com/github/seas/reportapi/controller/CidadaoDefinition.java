@@ -1,7 +1,8 @@
 package com.github.seas.reportapi.controller;
 
 import com.github.seas.reportapi.config.validation.ErrorExceptionHandler;
-import com.github.seas.reportapi.controller.dto.CidadaoDto;
+import com.github.seas.reportapi.domain.dto.CidadaoDto;
+import com.github.seas.reportapi.controller.form.SearchCidadao;
 import com.github.seas.reportapi.domain.Cidadao;
 import com.github.seas.reportapi.exception.ErroInfo;
 import com.github.seas.reportapi.exception.NotFoundException;
@@ -10,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -22,14 +22,14 @@ public interface CidadaoDefinition {
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<Page<Cidadao>> getAllCidadoes(int page, int size, CidadaoDto cidadaoRequest);
+    ResponseEntity<Page<CidadaoDto>> getAllCidadoes(int page, int size, SearchCidadao cidadaoRequest);
 
     @ApiOperation(value = "Criar um cidadao")
     @ApiResponses({
             @ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
             @ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
             @ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-    ResponseEntity<Cidadao> createCidadao(CidadaoDto cidadaoToCreate);
+    ResponseEntity<Cidadao> createCidadao(CidadaoDto cidadaoToCreate) throws NotFoundException;
 
     @ApiOperation(value = "Atualiza um cidadao")
     @ApiResponses({

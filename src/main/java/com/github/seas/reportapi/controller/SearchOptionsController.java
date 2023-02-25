@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.controller;
 
-import com.github.seas.reportapi.controller.dto.SearchOptionalDto;
+import com.github.seas.reportapi.domain.dto.SearchOptionalDto;
 import com.github.seas.reportapi.domain.enums.ModalityEnum;
 import com.github.seas.reportapi.domain.enums.MotivoAbordagemEnum;
 import com.github.seas.reportapi.domain.enums.PeriodoJundiaiEnum;
