@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.4.4
+        uses: actions/checkout@v3.4.0
 
       - name: Build with Maven
         run: mvn package
