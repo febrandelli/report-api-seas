@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/api-seas:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-seas:latest
