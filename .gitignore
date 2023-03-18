@@ -1,6 +1,7 @@
 # flyctl launch added from .gitignore
 **\HELP.md
 !**\.mvn\wrapper\maven-wrapper.jar
+target/
 
 ### STS ###
 **\.apt_generated
