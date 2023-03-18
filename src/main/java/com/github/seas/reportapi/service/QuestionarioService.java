@@ -1,17 +1,17 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.domain.dto.QuestionarioDto;
 import com.github.seas.reportapi.converter.QuestionarioConverter;
 import com.github.seas.reportapi.domain.Questionario;
 import com.github.seas.reportapi.domain.Servico;
 import com.github.seas.reportapi.domain.Usuario;
+import com.github.seas.reportapi.domain.dto.QuestionarioDto;
+import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.repository.CidadaoRepository;
 import com.github.seas.reportapi.repository.CidadeRepository;
 import com.github.seas.reportapi.repository.QuestionarioRepository;
 import com.github.seas.reportapi.repository.ServicoRepository;
 import com.github.seas.reportapi.repository.UsuarioRepository;
 import javassist.tools.web.BadHttpRequest;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,7 +71,7 @@ public class QuestionarioService {
 				return questionario.orElse(questionarioUpdate);
 		}
 
-		public Questionario getById(Long id) throws NotFound {
-				return questionarioRepository.findById(id).orElseThrow(NotFound::new);
+		public Questionario getById(Long id) throws NotFoundException {
+				return questionarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Questionario id: " + id + " not found"));
 		}
 }

@@ -1,11 +1,11 @@
 package com.github.seas.reportapi.controller;
 
-import com.github.seas.reportapi.domain.dto.QuestionarioDto;
 import com.github.seas.reportapi.converter.QuestionarioConverter;
 import com.github.seas.reportapi.domain.Questionario;
+import com.github.seas.reportapi.domain.dto.QuestionarioDto;
+import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.service.QuestionarioService;
 import javassist.tools.web.BadHttpRequest;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +38,7 @@ public class QuestionarioController
 
 		@CrossOrigin
 		@GetMapping("/{id}")
-		public ResponseEntity<QuestionarioDto> getAllQuestionarios(@PathVariable Long id) throws NotFound {
+		public ResponseEntity<QuestionarioDto> getAllQuestionarios(@PathVariable Long id) throws NotFoundException {
 				return new ResponseEntity<>(questionarioConverter.toDto(questionarioService.getById(id)), HttpStatus.OK);
 		}
 
