@@ -1,4 +1,4 @@
-package com.github.seas.reportapi.controller.dto;
+package com.github.seas.reportapi.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

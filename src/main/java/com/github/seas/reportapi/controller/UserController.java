@@ -2,7 +2,7 @@ package com.github.seas.reportapi.controller;
 
 import com.github.seas.reportapi.controller.form.ResetPasswordRequest;
 import com.github.seas.reportapi.controller.form.UserCreateForm;
-import com.github.seas.reportapi.controller.dto.UserResponseDto;
+import com.github.seas.reportapi.domain.dto.UserResponseDto;
 import com.github.seas.reportapi.controller.form.UserUpdateForm;
 import com.github.seas.reportapi.controller.response.ResetPasswordResponse;
 import com.github.seas.reportapi.domain.Usuario;

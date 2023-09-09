@@ -1,4 +1,4 @@
-package com.github.seas.reportapi.controller.dto;
+package com.github.seas.reportapi.domain.dto;
 
 import com.github.seas.reportapi.domain.Perfil;
 import com.github.seas.reportapi.domain.Usuario;

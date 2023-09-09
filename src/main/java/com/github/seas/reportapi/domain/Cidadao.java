@@ -6,7 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -32,27 +42,27 @@ public class Cidadao {
     private String nomeMae;
 
     @Column(name = "TIPO_DOCUMENTO")
-    private DocumentTypeEnum tipoDocuemnto;
+    private DocumentTypeEnum tipoDocumento;
 
     @Column(name = "NUMERO_DOCUMENTO")
-    private String numeroDocuemnto;
+    private String numeroDocumento;
 
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_SEXO")
     private Sexo sexo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_COR")
     private Cor cor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_CIDADE")
     private Cidade cidadeNascimento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_PRINCIPAL_RENDA")
     private FonteDeRenda fonteDeRenda;
 

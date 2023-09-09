@@ -1,9 +1,7 @@
 package com.github.seas.reportapi.controller;
 
 import com.github.seas.reportapi.config.validation.ErrorExceptionHandler;
-import com.github.seas.reportapi.controller.dto.QuestionarioDto;
-import com.github.seas.reportapi.controller.dto.QuestionarioResponse;
-import com.github.seas.reportapi.controller.form.QuestionarioRequest;
+import com.github.seas.reportapi.domain.dto.QuestionarioDto;
 import com.github.seas.reportapi.exception.ErroInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,5 +27,5 @@ public interface QuestionarioDefination {
 			@ApiResponse(code = 400, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_400, response = ErroInfo.class),
 			@ApiResponse(code = 404, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_404, response = ErroInfo.class),
 			@ApiResponse(code = 500, message = ErrorExceptionHandler.MENSAGEM_GLOBAL_500, response = ErroInfo.class)})
-	public ResponseEntity<QuestionarioResponse> create (QuestionarioRequest questionarioRequest) throws BadHttpRequest;
+	public ResponseEntity<QuestionarioDto> create (QuestionarioDto questionarioDto) throws BadHttpRequest;
 }

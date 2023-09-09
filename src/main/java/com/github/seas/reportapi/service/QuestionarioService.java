@@ -1,19 +1,16 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.controller.dto.QuestionarioDto;
-import com.github.seas.reportapi.controller.dto.QuestionarioResponse;
-import com.github.seas.reportapi.controller.form.QuestionarioRequest;
-import com.github.seas.reportapi.domain.Cidadao;
-import com.github.seas.reportapi.domain.Cidade;
+import com.github.seas.reportapi.converter.QuestionarioConverter;
 import com.github.seas.reportapi.domain.Questionario;
 import com.github.seas.reportapi.domain.Servico;
 import com.github.seas.reportapi.domain.Usuario;
+import com.github.seas.reportapi.domain.dto.QuestionarioDto;
+import com.github.seas.reportapi.exception.NotFoundException;
 import com.github.seas.reportapi.repository.CidadaoRepository;
 import com.github.seas.reportapi.repository.CidadeRepository;
 import com.github.seas.reportapi.repository.QuestionarioRepository;
 import com.github.seas.reportapi.repository.ServicoRepository;
 import com.github.seas.reportapi.repository.UsuarioRepository;
-import com.github.seas.reportapi.utils.QuestionarioConverter;
 import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,60 +19,59 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionarioService {
+		private final QuestionarioRepository questionarioRepository;
+		private final CidadaoRepository cidadaoRepository;
+		private final ServicoRepository servicoRepository;
+		private final UsuarioRepository usuarioRepository;
+		private final CidadeRepository cidadeRepository;
+		private final QuestionarioConverter questionarioConverter;
 
-	@Autowired
-	private QuestionarioRepository questionarioRepository;
+		@Autowired
+		public QuestionarioService(QuestionarioRepository questionarioRepository, CidadaoRepository cidadaoRepository, ServicoRepository servicoRepository, UsuarioRepository usuarioRepository,
+						CidadeRepository cidadeRepository, QuestionarioConverter questionarioConverter) {
+				this.questionarioRepository = questionarioRepository;
+				this.cidadaoRepository = cidadaoRepository;
+				this.servicoRepository = servicoRepository;
+				this.usuarioRepository = usuarioRepository;
+				this.cidadeRepository = cidadeRepository;
+				this.questionarioConverter = questionarioConverter;
+		}
 
-	@Autowired
-	private CidadaoRepository cidadaoRepository;
+		public ResponseEntity<Page<QuestionarioDto>> getAll(Pageable pageable) {
 
-	@Autowired
-	private ServicoRepository servicoRepository;
+				Page<Questionario> questionarios = questionarioRepository.findAll(pageable);
+				Page<QuestionarioDto> questionariosDto = questionarios.map(questionario -> questionarioConverter.toDto(questionario));
+				return ResponseEntity.ok(questionariosDto);
+		}
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+		public Questionario create(Questionario newQuestionario) throws BadHttpRequest {
 
-	@Autowired
-	private CidadeRepository cidadeRepository;
+				newQuestionario.setDtInsert(LocalDateTime.now());
+				newQuestionario.setCidadao(cidadaoRepository.findById(newQuestionario.getCidadao().getId()).orElseThrow(BadHttpRequest::new));
+				newQuestionario.setCidadeOrigem(cidadeRepository.findById(newQuestionario.getCidadeOrigem().getId()).orElseThrow(BadHttpRequest::new));
+				newQuestionario.setServicoBuscaJundiai(servicoRepository.findByIdIn(
+								newQuestionario.getServicoBuscaJundiai().stream().map(Servico::getId).collect(Collectors.toList())
+				));
+				newQuestionario.setResponsavelPreenchimento(usuarioRepository.findByNomeCompletoIn(
+								newQuestionario.getResponsavelPreenchimento().stream().map(Usuario::getNomeCompleto).collect(Collectors.toList())
+				));
 
-	public ResponseEntity<Page<QuestionarioDto>> getAll (Pageable pageable) {
+				newQuestionario = questionarioRepository.save(newQuestionario);
 
-		Page<Questionario> questionarios = questionarioRepository.findAll(pageable);
-		Page<QuestionarioDto> questionariosDto = questionarios.map(questionario -> new QuestionarioConverter().convert(questionario));
-		return ResponseEntity.ok(questionariosDto);
-	}
+				return newQuestionario;
+		}
 
-	public ResponseEntity<QuestionarioResponse> create (QuestionarioRequest questionarioRequest) throws BadHttpRequest {
-		Cidadao cidadao = cidadaoRepository.findById(questionarioRequest.getIdCidadao()).orElseThrow(BadHttpRequest::new);
-		Cidade cidade = cidadeRepository.findById(questionarioRequest.getIdCidadeOrigem()).orElseThrow(BadHttpRequest::new);
-		Set<Servico> servicos = servicoRepository.findByIdIn(questionarioRequest.getServicoBuscaJundiai());
-		Set<Usuario> responsaveisPreenchimento = usuarioRepository.findByIdIn(questionarioRequest.getResponsavelPreenchimento());
+		public Questionario update(Questionario questionarioUpdate) {
+				Optional<Questionario> questionario = questionarioRepository.findById(questionarioUpdate.getId());
+				return questionario.orElse(questionarioUpdate);
+		}
 
-		Questionario questionario = new Questionario();
-		questionario.setDtInsert(LocalDateTime.now());
-		questionario.setLocal(questionarioRequest.getLocal());
-		questionario.setCidadao(cidadao);
-		questionario.setCidadeOrigem(cidade);
-		questionario.setMotivoAbordagem(questionarioRequest.getMotivoAbordagem());
-		questionario.setNumeroChamado(questionarioRequest.getNumeroChamado());
-		questionario.setTempoJundiai(questionarioRequest.getTempoJundiai());
-		questionario.setTempoSituacaoRua(questionarioRequest.getTempoSituacaoDeRua());
-		questionario.setServicoBuscaJundiai(servicos);
-		questionario.setResponsavelPreenchimento(responsaveisPreenchimento);
-		questionario.setObservacao(questionarioRequest.getObservacao());
-		questionario.setQtPessoasAbordadas(questionarioRequest.getPessoasAbordadas());
-		questionario.setOrientacao(questionarioRequest.getOrientacoes());
-		questionario.setEncaminhamento(questionarioRequest.getEncaminhadoPara());
-
-		Questionario questionarioSaved = questionarioRepository.save(questionario);
-		QuestionarioResponse questionarioResponse = new QuestionarioResponse();
-		questionarioResponse.setId(questionarioSaved.getId());
-		questionarioResponse.setDateRegister(LocalDateTime.now());
-
-		return ResponseEntity.ok(questionarioResponse);
-	}
+		public Questionario getById(Long id) throws NotFoundException {
+				return questionarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Questionario id: " + id + " not found"));
+		}
 }

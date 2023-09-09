@@ -1,12 +1,12 @@
 package com.github.seas.reportapi.service;
 
-import com.github.seas.reportapi.controller.dto.SearchOptionalDto;
-import com.github.seas.reportapi.controller.dto.CidadaoDto;
+import com.github.seas.reportapi.domain.Cor;
+import com.github.seas.reportapi.domain.dto.SearchOptionalDto;
+import com.github.seas.reportapi.controller.form.SearchCidadao;
 import com.github.seas.reportapi.domain.Beneficio;
 import com.github.seas.reportapi.domain.CasoEspecial;
 import com.github.seas.reportapi.domain.Cidadao;
 import com.github.seas.reportapi.domain.Cidade;
-import com.github.seas.reportapi.domain.Cor;
 import com.github.seas.reportapi.domain.FonteDeRenda;
 import com.github.seas.reportapi.domain.Motivo;
 import com.github.seas.reportapi.domain.Sexo;
@@ -24,8 +24,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -51,7 +49,7 @@ public class CidadaoService {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(new Locale("pt", "BR"));
 
-    public ResponseEntity<Page<Cidadao>> listAllCidadoes(CidadaoDto cidadaoDto, Pageable pageable) {
+    public Page<Cidadao> listAllCidadoes(SearchCidadao searchCidadao, Pageable pageable) {
         Cidadao cidadaoToMatch = new Cidadao();
         Set<Beneficio> beneficios = null;
         Set<CasoEspecial> casosEspeciais = null;
@@ -61,39 +59,39 @@ public class CidadaoService {
         Set<Motivo> motivos = null;
         Sexo sexo = null;
 
-        if (cidadaoDto.getBeneficios() != null) {
-            beneficios = beneficioRepository.findByIdIn(cidadaoDto.getBeneficios());
+        if (searchCidadao.getBeneficios() != null) {
+            beneficios = beneficioRepository.findByIdIn(searchCidadao.getBeneficios());
+            cidadaoToMatch.setBeneficios(beneficios);
         }
-        if (cidadaoDto.getCasosEspeciais() != null) {
-            casosEspeciais = casoEspecialRepository.findByIdIn(cidadaoDto.getCasosEspeciais());
+        if (searchCidadao.getCasosEspeciais() != null) {
+            casosEspeciais = casoEspecialRepository.findByIdIn(searchCidadao.getCasosEspeciais());
+            cidadaoToMatch.setCasosEspeciais(casosEspeciais);
         }
-        if (cidadaoDto.getCidadeNascimento() != null) {
-            cidade = cidadeRepository.findById(cidadaoDto.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
+        if (searchCidadao.getCidadeNascimento() != null) {
+            cidade = cidadeRepository.findById(searchCidadao.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
+            cidadaoToMatch.setCidadeNascimento(cidade);
         }
-        if (cidadaoDto.getCor() != null) {
-            cor = corRepository.findById(cidadaoDto.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
+        if (searchCidadao.getCor() != null) {
+            cor = corRepository.findById(searchCidadao.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
+            cidadaoToMatch.setCor(cor);
         }
-        if (cidadaoDto.getFonteDeRenda() != null) {
-            fonteDeRenda = fonteDeRendaRepository.findById(cidadaoDto.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
+        if (searchCidadao.getFonteDeRenda() != null) {
+            fonteDeRenda = fonteDeRendaRepository.findById(searchCidadao.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
+            cidadaoToMatch.setFonteDeRenda(fonteDeRenda);
         }
-        if (cidadaoDto.getMotivos() != null) {
-            motivos = motivoRepository.findByIdIn(cidadaoDto.getMotivos());
+        if (searchCidadao.getMotivos() != null) {
+            motivos = motivoRepository.findByIdIn(searchCidadao.getMotivos());
+            cidadaoToMatch.setMotivos(motivos);
         }
-        if (cidadaoDto.getSexo() != null) {
-            sexo = sexoRepository.findById(cidadaoDto.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
+        if (searchCidadao.getSexo() != null) {
+            sexo = sexoRepository.findById(searchCidadao.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
+            cidadaoToMatch.setSexo(sexo);
         }
 
-        cidadaoToMatch.setBeneficios(beneficios);
-        cidadaoToMatch.setCasosEspeciais(casosEspeciais);
-        cidadaoToMatch.setCidadeNascimento(cidade);
-        cidadaoToMatch.setCor(cor);
-        cidadaoToMatch.setDataNascimento(Objects.isNull(cidadaoDto.getDataNascimento()) ? null : LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
-        cidadaoToMatch.setFonteDeRenda(fonteDeRenda);
-        cidadaoToMatch.setMotivos(motivos);
-        cidadaoToMatch.setNome(cidadaoDto.getNome());
-        cidadaoToMatch.setQuerSairDasRuas(cidadaoDto.getQuerSairDasRuas());
-        cidadaoToMatch.setSexo(sexo);
-        cidadaoToMatch.setPrecisaParaSairRua(cidadaoDto.getPrecisaParaSairRua());
+        cidadaoToMatch.setDataNascimento(Objects.isNull(searchCidadao.getDataNascimento()) ? null : LocalDate.parse(searchCidadao.getDataNascimento(), formatter));
+        cidadaoToMatch.setNome(searchCidadao.getNome());
+        cidadaoToMatch.setQuerSairDasRuas(searchCidadao.getQuerSairDasRuas());
+        cidadaoToMatch.setPrecisaParaSairRua(searchCidadao.getPrecisaParaSairRua());
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withIgnoreNullValues()
@@ -101,67 +99,28 @@ public class CidadaoService {
 
         Example<Cidadao> cidadaoExample = Example.of(cidadaoToMatch, exampleMatcher);
 
-        Page<Cidadao> cidadoes = cidadaoRepository.findAll(cidadaoExample, pageable);
-        if (cidadoes.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok(cidadoes);
+        return cidadaoRepository.findAll(cidadaoExample, pageable);
     }
 
-    public ResponseEntity<Cidadao> createCidadao(CidadaoDto cidadaoDto) {
-        Set<Beneficio> beneficios = beneficioRepository.findByIdIn(cidadaoDto.getBeneficios());
-        Set<CasoEspecial> casosEspeciais = casoEspecialRepository.findByIdIn(cidadaoDto.getCasosEspeciais());
-        Cidade cidade = cidadeRepository.findById(cidadaoDto.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
-        Cor cor = corRepository.findById(cidadaoDto.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
-        FonteDeRenda fonteDeRenda = fonteDeRendaRepository.findById(cidadaoDto.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
-        Set<Motivo> motivos = motivoRepository.findByIdIn(cidadaoDto.getMotivos());
-        Sexo sexo = sexoRepository.findById(cidadaoDto.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
-
-        Cidadao novoCidadao = new Cidadao();
-        novoCidadao.setBeneficios(beneficios);
-        novoCidadao.setCasosEspeciais(casosEspeciais);
-        novoCidadao.setCidadeNascimento(cidade);
-        novoCidadao.setCor(cor);
-        novoCidadao.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
-        novoCidadao.setFonteDeRenda(fonteDeRenda);
-        novoCidadao.setMotivos(motivos);
-        novoCidadao.setNome(cidadaoDto.getNome());
-        novoCidadao.setQuerSairDasRuas(cidadaoDto.getQuerSairDasRuas());
-        novoCidadao.setSexo(sexo);
-        novoCidadao.setPrecisaParaSairRua(cidadaoDto.getPrecisaParaSairRua());
-        novoCidadao.setNomeMae(cidadaoDto.getNomeMae());
-        novoCidadao.setNomePai(cidadaoDto.getNomePai());
-        novoCidadao.setTipoDocuemnto(cidadaoDto.getTipoDocumento());
-        novoCidadao.setNumeroDocuemnto(cidadaoDto.getNumeroDocumento());
-
-        Cidadao cidadaoCreated = cidadaoRepository.save(novoCidadao);
-        return ResponseEntity.ok(cidadaoCreated);
+    public Cidadao createCidadao(Cidadao newCidadao) {return cidadaoRepository.save(newCidadao);
     }
 
-    public ResponseEntity<Cidadao> updateCidadao(Long idCidadaoToUpdate, CidadaoDto cidadaoDto) throws NotFoundException {
-        Set<Beneficio> beneficios = beneficioRepository.findByIdIn(cidadaoDto.getBeneficios());
-        Set<CasoEspecial> casosEspeciais = casoEspecialRepository.findByIdIn(cidadaoDto.getCasosEspeciais());
-        Cidade cidade = cidadeRepository.findById(cidadaoDto.getCidadeNascimento()).orElseThrow(() -> new IllegalArgumentException("Id da cidade incorreto"));
-        Cor cor = corRepository.findById(cidadaoDto.getCor()).orElseThrow(() -> new IllegalArgumentException("Id da cor incorreto"));
-        FonteDeRenda fonteDeRenda = fonteDeRendaRepository.findById(cidadaoDto.getFonteDeRenda()).orElseThrow(() -> new IllegalArgumentException("Id da fonte de renda incorreto"));
-        Set<Motivo> motivos = motivoRepository.findByIdIn(cidadaoDto.getMotivos());
-        Sexo sexo = sexoRepository.findById(cidadaoDto.getSexo()).orElseThrow(() -> new IllegalArgumentException("Id do sexo incorreto"));
+    public Cidadao updateCidadao(Long idCidadaoToUpdate, Cidadao cidadaoToUpdate) throws NotFoundException {
 
         Cidadao cidadaoFinded = cidadaoRepository.findById(idCidadaoToUpdate).orElseThrow(() -> new NotFoundException("Usuario não encontrado"));
-        cidadaoFinded.setBeneficios(beneficios);
-        cidadaoFinded.setCasosEspeciais(casosEspeciais);
-        cidadaoFinded.setCidadeNascimento(cidade);
-        cidadaoFinded.setCor(cor);
-        cidadaoFinded.setDataNascimento(LocalDate.parse(cidadaoDto.getDataNascimento(), formatter));
-        cidadaoFinded.setFonteDeRenda(fonteDeRenda);
-        cidadaoFinded.setMotivos(motivos);
-        cidadaoFinded.setNome(cidadaoDto.getNome());
-        cidadaoFinded.setQuerSairDasRuas(cidadaoDto.getQuerSairDasRuas());
-        cidadaoFinded.setSexo(sexo);
-        cidadaoFinded.setPrecisaParaSairRua(cidadaoDto.getPrecisaParaSairRua());
+        cidadaoFinded.setBeneficios(cidadaoToUpdate.getBeneficios());
+        cidadaoFinded.setCasosEspeciais(cidadaoToUpdate.getCasosEspeciais());
+        cidadaoFinded.setCidadeNascimento(cidadaoToUpdate.getCidadeNascimento());
+        cidadaoFinded.setCor(cidadaoToUpdate.getCor());
+        cidadaoFinded.setDataNascimento(cidadaoToUpdate.getDataNascimento());
+        cidadaoFinded.setFonteDeRenda(cidadaoToUpdate.getFonteDeRenda());
+        cidadaoFinded.setMotivos(cidadaoToUpdate.getMotivos());
+        cidadaoFinded.setNome(cidadaoToUpdate.getNome());
+        cidadaoFinded.setQuerSairDasRuas(cidadaoToUpdate.getQuerSairDasRuas());
+        cidadaoFinded.setSexo(cidadaoToUpdate.getSexo());
+        cidadaoFinded.setPrecisaParaSairRua(cidadaoToUpdate.getPrecisaParaSairRua());
 
-        Cidadao cidadaoUpdated = cidadaoRepository.save(cidadaoFinded);
-        return ResponseEntity.ok(cidadaoUpdated);
+        return cidadaoRepository.save(cidadaoFinded);
     }
 
     public List<SearchOptionalDto> getCidadaos() {

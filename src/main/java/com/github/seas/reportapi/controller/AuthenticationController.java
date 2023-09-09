@@ -1,6 +1,6 @@
 package com.github.seas.reportapi.controller;
 
-import com.github.seas.reportapi.controller.dto.TokenDto;
+import com.github.seas.reportapi.domain.dto.TokenDto;
 import com.github.seas.reportapi.controller.form.LoginForm;
 import com.github.seas.reportapi.controller.form.ValidTokenForm;
 import com.github.seas.reportapi.service.AuthenticationService;
