@@ -117,35 +117,35 @@ public class OptionController	implements OptionControllerDefinition {
 				return beneficioService.getAllBeneficio();
 		}
 
-		@GetMapping("/reasonApproaches")
+		@GetMapping("/search/reasonApproaches")
 		public List<SearchOptionalDto> searchReasons () {
 				List<SearchOptionalDto> searchReasons = new ArrayList<>();
 				Arrays.stream(MotivoAbordagemEnum.values()).forEach(reason -> searchReasons.add(new SearchOptionalDto(reason.name(), reason.name())));
 				return searchReasons;
 		}
 
-		@GetMapping("/timeInJundiai")
+		@GetMapping("/search/timeInJundiai")
 		public List<SearchOptionalDto> searchTimeInJundiai () {
 				List<SearchOptionalDto> searchTimeInJundiai = new ArrayList<>();
 				Arrays.stream(PeriodoJundiaiEnum.values()).forEach(timeInJundiai -> searchTimeInJundiai.add(new SearchOptionalDto(timeInJundiai.name(), timeInJundiai.name())));
 				return searchTimeInJundiai;
 		}
 
-		@GetMapping("/timeLivingOnTheStreet")
+		@GetMapping("/search/timeLivingOnTheStreet")
 		public List<SearchOptionalDto> searchTimeLivingOnTheStreet () {
 				List<SearchOptionalDto> searchTimeLivingOnTheStreet = new ArrayList<>();
 				Arrays.stream(PeriodoSituacaoRuaEnum.values()).forEach(reason -> searchTimeLivingOnTheStreet.add(new SearchOptionalDto(reason.name(), reason.name())));
 				return searchTimeLivingOnTheStreet;
 		}
 
-		@GetMapping("/modality")
+		@GetMapping("/search/modality")
 		public List<SearchOptionalDto> searchModality () {
 				List<SearchOptionalDto> modalities = new ArrayList<>();
 				Arrays.stream(ModalityEnum.values()).forEach(modality -> modalities.add(new SearchOptionalDto(modality.name(), modality.getNomenclatura())));
 				return modalities;
 		}
 
-		@GetMapping("/satisfaction")
+		@GetMapping("/search/satisfaction")
 		public List<SearchOptionalDto> searchSatisfaction () {
 				List<SearchOptionalDto> satisfactions = new ArrayList<>();
 				Arrays.stream(SatisfactionEnum.values()).forEach(satisfaction -> satisfactions.add(new SearchOptionalDto(satisfaction.name(), satisfaction.name())));
@@ -157,7 +157,7 @@ public class OptionController	implements OptionControllerDefinition {
 				return servicoService.getServicos();
 		}
 
-		@GetMapping("/cidadaos")
+		@GetMapping("/search/cidadaos")
 		public List<SearchOptionalDto> searchCidadaos() {
 				return cidadaoService.getCidadaos();
 		}
