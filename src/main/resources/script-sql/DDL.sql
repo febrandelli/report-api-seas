@@ -129,7 +129,7 @@ CREATE TABLE questionario
     encaminhamento           TEXT,
     orientacao               TEXT,
     satisfacao               VARCHAR(50),
-    observacao               TEXT,
+    observacao               TEXT
 );
 
 CREATE TABLE servico

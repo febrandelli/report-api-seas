@@ -102,11 +102,7 @@ public class CidadaoService {
         return cidadaoRepository.findAll(cidadaoExample, pageable);
     }
 
-    public Cidadao createCidadao(Cidadao newCidadao) throws NotFoundException {
-
-
-
-        return cidadaoRepository.save(newCidadao);
+    public Cidadao createCidadao(Cidadao newCidadao) {return cidadaoRepository.save(newCidadao);
     }
 
     public Cidadao updateCidadao(Long idCidadaoToUpdate, Cidadao cidadaoToUpdate) throws NotFoundException {
