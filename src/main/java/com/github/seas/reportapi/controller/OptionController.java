@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/sexo")
+@RequestMapping()
 public class OptionController	implements OptionControllerDefinition {
 		private final SexoService sexoService;
 		private final MotivoService motivoService;
@@ -91,7 +91,6 @@ public class OptionController	implements OptionControllerDefinition {
 								.map(DocumentTypeDto::new).collect(Collectors.toList()));
 		}
 
-		@CrossOrigin
 		@GetMapping("/cor")
 		public ResponseEntity<List<Cor>> getAllCor() {
 				return corService.getAllCor();
