@@ -1,3 +1,5 @@
+**\.docker-volume
+
 # flyctl launch added from .gitignore
 **\HELP.md
 !**\.mvn\wrapper\maven-wrapper.jar
